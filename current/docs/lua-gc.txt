@@ -1,0 +1,72 @@
+some thoughts on garbage collection for Lua, in game engines:
+
+* Lua could greatly benefit from having an incremental GC for
+  applications like action games, which are basically soft real-time
+  systems.
+
+* Console games typically require hitting a 60Hz or 30Hz framerate
+  target, consistently.  That amounts to 16.7ms or 33.3ms maximum
+  processing time per frame.  Much of the main CPU's time is consumed
+  with gameplay and graphics tasks, which are usually very demanding.
+  So a viable scripting language really can't be allowed to *ever*
+  have a latency of more than say 1 or 2ms for doing GC.
+
+* The total amortized overhead of GC, on the other hand, is not as
+  critical.  As long as the GC never has a latency of more than 1 or
+  2ms, then it can take that amount of time every frame.  Obviously
+  it's better for the amortized cost to be low, but the worst-case
+  cost is far more important for a game.
+
+* Lua's current garbage collector uses a traditional simple
+  non-incremental mark-and-sweep algorithm.  When a collection cycle
+  begins, it walks all reachable heap objects in the mark phase, and
+  then walks the entire heap in the sweep phase.  So the time cost is
+  proportional to the number of objects on the heap, plus the number
+  of reachable objects.
+
+* Other collector types: a copying collector might be feasible, but
+  for our purposes probably requires more overhead than
+  mark-and-sweep.  Generational GC greatly improves the average case
+  but doesn't prevent worst-case hiccups.  Also generational GC is
+  more complicated.  An incremental generational GC would be a good
+  next step after a vanilla incremental GC.
+
+* Incremental collectors: the problem of making the stock
+  mark-and-sweep algorithm incremental has been well studied.
+  Johnstone's thesis summarizes the approaches pretty well.  The main
+  additional cost for Lua is that the Lua VM must use a "write
+  barrier" whenever it changes the value of a pointer.  The write
+  barrier looks at the internal state of the collector, and marks
+  either the new pointer or the old pointer under certain conditions.
+
+  To maintain low-latency operation, the garbage collector must be
+  allowed to perform a little bit of work on a regular basis.  For
+  games, this means the game loop should call the garbage collector
+  once per frame.  This is a much coarser level of granularity than
+  what is usually discussed in the literature, where the focus has
+  often been on algorithms for multiprocessors.  Johnstone's thesis
+  explicitly addresses the uniprocessor case though.
+
+  The write barrier is pretty simple; there are a few variations
+  depending on the exact algorithm, but in the end it amounts to maybe
+  5 or 10 lines of C, and 10 or 20 instructions.
+
+* I've written such a collector before for a Scheme interpreter.  The
+  most difficult part of that project was ensuring that there was a
+  write barrier in every case where pointers were changed.  It's
+  definitely doable, and the Lua API prevents host programs from
+  accessing Lua's internal pointers, so it shouldn't be too hard.
+
+* It would be nice if the incremental collector behaved like the
+  regular collector when used as such.  I.e. if the "do some work"
+  call is never made, collection should still happen automatically
+  (albeit at the expense of an occasional long latency, like it is
+  now).  It would be especially nice if the incremental collector did
+  not impose extra overhead in code size, collection time, and memory
+  use, compared to the regular collector, because then the regular
+  collector could be replaced completely in stock Lua with no penalty.
+  My guess is that a compile-time switch could be used to ensure no
+  extra overhead.  Also, I suspect that with some care, the
+  incremental collector can be coded to avoid any extra memory use.
+  It remains to be seen what the code size and time overheads will be.
+  I suspect that both overheads will be small, but more than zero.

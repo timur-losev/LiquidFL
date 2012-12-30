@@ -1,0 +1,123 @@
+Random thoughts on coding style/conventions:
+
+* Hungarian Notation is a crime against programity and I will not
+  mention it again.
+
+* Scope (not type) prefixes are a different animal, and may be OK.
+  For example, the common practice of prefixing member variables with
+  'm_'.  I'm experimenting on a limited basis.  The 'm_' convention
+  might be enough for me; I'm not sure it's useful to have prefixes
+  for constants, globals (you have globals in your code? :), statics,
+  etc.
+
+  Update: I use c_ and s_ prefixes at work, and am becoming used to
+  them.  Personally I think c_ is retarded; ALL_CAPS is older K&R
+  approved style, more readable, and therefore better.  s_ is not bad
+  though.
+
+  g_ is not an issue -- global data is not allowed.  If that's what
+  you want, just make an accessor, already.
+
+  Summary:
+
+     m_ for struct/class members
+     s_ for statics
+     ALL_CAPS for constants & macros
+     no scope/type prefixes on anything else
+
+* For me, the correct tab size will always be 8.  However, I think the
+  One True Style is to not write tab size dependent code; that way
+  everybody can pick their favorite tab size.  The key to this is to
+  let go of trying to line things in a particular column; that's a
+  maintenance nightmare anyway.  The One True Style uses tabs in two
+  places only: 1) indentation, and 2) before comments on the end of
+  code lines.  I'm pretty ironclad in favor of 1; 2 is debatable.
+  E.g.
+
+	for (;;) {
+		// indented with tabs; pick your tab size, and enjoy.
+		int a;	// *one* tab before this comment.
+		bool b;	// same thing here
+	}
+
+  There's one gaping hole with this scheme, which is that indented
+  paragraph comments right-justify at a tab-size dependent distance to
+  the right, if your editor likes to justify at a particular column.
+  Proposed solution: at some point I'll see if it's easy to make emacs
+  always use 70 columns for justifying comments, starting from the
+  indent rather than column 0.
+
+  I used to put one tab after the typename in a variable declaration,
+  but I've stopped doing it; it's a little too confusing for most
+  programmers.
+
+  Summary:
+
+    tab size is 8.  Deal with it.
+
+* Where to put the brace?  The One True Style recognizes two valid
+  options:
+
+	if (condition) {
+		do stuff;
+	}
+
+or
+
+	if (condition)
+	{
+		do stuff;
+	}
+
+  That ought to be enough choices for every occasion.  The GNU-esque
+  abomination:
+
+	if (condition)
+	  {
+	    do stuff;
+	  }
+
+  is not allowed.
+
+* Function comments are required for anything more than a one-liner,
+  and they belong between the function header and the body.  Like
+  this:
+
+	int function(int a, int b)
+	// Returns a function of a and b.  Put any necessary explanation
+	// here.
+	{
+		return a + b * a;
+	}
+
+  You can't lose them this way, and they're more likely to get used
+  and maintained.
+
+* Identifiers: I'm back to lowercase_with_embedded_underscores.  I
+  wandered in the EmbeddedCaps desert for a long time, but embedded
+  underscores are easier to read and type.  They take up a little more
+  room, but I think it's probably worth it for the readability.  They
+  don't relentlessly expose the incompatibility between case-sensitive
+  and case-insensitive file systems (i.e. sloppy Windows users are
+  less likely to screw up the Linux build).
+
+* Spaces:
+
+  * Space after comma, always.
+  
+  * Spaces around operators.
+
+  * Space after 'if', 'else', 'for', 'while', 'do', always.
+
+  * No space between the function name and the '(' to start the
+    argument list -- never.
+
+  * No extra spaces inside parentheses.  I tried this, I really
+    inhaled.  It sucks -- there's no way (that I found) to do it
+    consistently, without making things even more unreadable and ugly.
+    Doing it inconsistently is obnoxious; too hard for others to learn
+    your idiosyncratic rules.
+
+* ~80-char lines of ///////////// or //------------ or whatever: not
+  allowed.  Too much effort to maintain.  Use blank lines to delimit
+  your sections.

@@ -1,0 +1,38 @@
+[
+  { "name": "base",
+    "type": "lib",
+    "src": [
+      "configvars.cpp",
+      "ear_clip_triangulate_float.cpp",
+      "ear_clip_triangulate_sint16.cpp",
+      "container.cpp",
+      "demo.cpp",
+      "dlmalloc.c",
+      "file_util.cpp",
+      "image.cpp",
+      "image_filters.cpp",
+      "jpeg.cpp",
+      "logger.cpp",
+      "membuf.cpp",
+      "ogl.cpp",
+      "png_helper.cpp",
+      "postscript.cpp",
+      "triangulate_float.cpp",
+      "triangulate_sint32.cpp",
+      "tu_file.cpp",
+      "tu_file_SDL.cpp",
+      "tu_gc_singlethreaded_marksweep.cpp",
+      "tu_loadlib.cpp",
+      "tu_random.cpp",
+      "tu_timer.cpp",
+      "tu_types.cpp",
+      "utf8.cpp",
+      "utility.cpp",
+      "zlib_adapter.cpp"
+    ],
+    "inc_dirs": [
+      "../../../../jpeg-6b",
+      "../../../../libpng-1.2.8"
+    ]
+  }
+]

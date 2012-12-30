@@ -6,8 +6,17 @@
 # Compiled Dynamic libraries
 *.so
 *.dylib
+#*.dll
+*.opensdf
+*.sdf
+*.suo
 
 # Compiled Static libraries
 *.lai
 *.la
-*.a
+*.tlog
+*.obj
+*.d
+*.user
+Debug/
+_build/

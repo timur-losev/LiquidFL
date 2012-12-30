@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>Test page for WebTweaker widgets</title>
+<META http-equiv="Content-Script-Type" content="text/javascript">
+<script src="static/wt_widgets.js"></script>
+<style>
+</style>
+</head>
+<body onLoad="wt_init()">
+
+<h4>Here are some test widgets for the WebTweaker:</h4>
+
+<form action="" method=POST name="wt">
+
+<table>
+  <tr><td width=200px valign=top style="border-right: 2px solid #1020D0;">
+
+    <script>
+      new wt_tree_node("0", "node1", 1);
+    </script><div style="margin-left: 1em">
+      <script>
+        new wt_tree_node("1", "node2", 0);
+      </script><div style="margin-left: 1em">
+        <script>
+          new wt_tree_node("2", "node3", 1);
+        </script>
+      </div>
+    </div>
+    
+    
+  </td><td style="padding-left: 5px;">
+
+<hr>
+Slider:
+
+<script>
+  new wt_slider("203A2E2D", "myvar1", 0, -100, 100);
+</script>
+
+<hr>
+Color Picker:
+
+<script>
+  new wt_color_picker("4", "mycolor1", "#40B3E1");
+</script>
+
+<hr>
+Angle
+
+<hr>
+
+etc...
+
+</td>
+</tr></table>
+
+</form>
+
+<!-- debug log window -->
+<form action="" method=POST name="debugout">
+  <textarea readonly=1 id="debugout" cols=80 rows=10></textarea>
+  <br>
+  <button type=button name=clear onclick="document.getElementById('debugout').value='';">Clear</button>
+</form>
+
+<!-- div id=whatever, span id=whatever -->
+
+</body>
+</html>

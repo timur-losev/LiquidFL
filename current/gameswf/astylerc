@@ -1,0 +1,7 @@
+--style=linux
+-N
+-t8
+--indent-classes // (broken for structs!)
+--pad=oper / -p  // a+b --> a + b
+--unpad=paren  // if ( foo(x) ) --> if (foo(x))
+-O   // keep single-line blocks, e.g. void mymethod() { assert(0); }

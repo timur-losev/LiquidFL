@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="gameswf">
+</Property><Property Name="Solution File" Value="E:\programming\LiquidFL\current\gameswf\win32\VC10\gameswf.sln">
+</Property><Property Name="Date" Value="30 декабря 2012 г.">
+</Property><Property Name="Time" Value="21:02">
+</Property></Properties><Event ErrorLevel="0" Project="gameswf" Source="gameswf.vcproj" Description="Converting project file 'E:\programming\LiquidFL\current\gameswf\win32\VC10\gameswf.vcproj'.">
+</Event><Event ErrorLevel="1" Project="gameswf" Source="gameswf.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="gameswf" Source="gameswf.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="gameswf" Source="gameswf.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="gameswf" Source="gameswf.vcproj" Description="MSB8012: $(TargetName) ('gameswf') does not match the Linker's OutputFile property value '.\Release/swfplayer.exe' ('swfplayer') in project configuration 'Release|Win32'. This may cause your project to build incorrectly. To correct this, please make sure that $(TargetName) property value matches the value specified in %(Link.OutputFile).">
+</Event><Event ErrorLevel="1" Project="gameswf" Source="gameswf.vcproj" Description="MSB8012: $(TargetPath) ('E:\programming\LiquidFL\current\gameswf\win32\VC10\.\Release\gameswf.exe') does not match the Linker's OutputFile property value '.\Release/swfplayer.exe' ('E:\programming\LiquidFL\current\gameswf\win32\VC10\Release/swfplayer.exe') in project configuration 'Release|Win32'. This may cause your project to build incorrectly. To correct this, please make sure that $(TargetPath) property value matches the value specified in %(Link.OutputFile).">
+</Event><Event ErrorLevel="1" Project="gameswf" Source="gameswf.vcproj" Description="MSB8012: $(TargetPath) ('E:\programming\LiquidFL\current\gameswf\win32\VC10\.\Debug\gameswf.exe') does not match the Linker's OutputFile property value '.\Debug\gameswf.exe' ('E:\programming\LiquidFL\current\gameswf\win32\VC10\Debug\gameswf.exe') in project configuration 'Debug|Win32'. This may cause your project to build incorrectly. To correct this, please make sure that $(TargetPath) property value matches the value specified in %(Link.OutputFile).">
+</Event><Event ErrorLevel="0" Project="gameswf" Source="gameswf.vcproj" Description="Done converting to new project file 'E:\programming\LiquidFL\current\gameswf\win32\VC10\gameswf.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="gameswf" Source="gameswf.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="libgameswf" Source="libgameswf.vcproj" Description="Converting project file 'E:\programming\LiquidFL\current\gameswf\win32\VC10\libgameswf.vcproj'.">
+</Event><Event ErrorLevel="1" Project="libgameswf" Source="libgameswf.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="libgameswf" Source="libgameswf.vcproj" Description="VCConvertEngine could not convert attribute UseUnicodeResponseFiles = false under Tool VCCLCompilerTool.">
+</Event><Event ErrorLevel="1" Project="libgameswf" Source="libgameswf.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="libgameswf" Source="libgameswf.vcproj" Description="VCConvertEngine could not convert attribute UseUnicodeResponseFiles = false under Tool VCCLCompilerTool.">
+</Event><Event ErrorLevel="1" Project="libgameswf" Source="libgameswf.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="libgameswf" Source="libgameswf.vcproj" Description="MSB8012: $(TargetPath) ('E:\programming\LiquidFL\current\gameswf\win32\VC10\Release\libgameswf.dll') does not match the Linker's OutputFile property value '/WINDOWS/system32/libgameswf.dll' ('E:\programming\LiquidFL\current\gameswf\win32\VC10\/WINDOWS/system32/libgameswf.dll') in project configuration 'Release|Win32'. This may cause your project to build incorrectly. To correct this, please make sure that $(TargetPath) property value matches the value specified in %(Link.OutputFile).">
+</Event><Event ErrorLevel="0" Project="libgameswf" Source="libgameswf.vcproj" Description="Done converting to new project file 'E:\programming\LiquidFL\current\gameswf\win32\VC10\libgameswf.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="libgameswf" Source="libgameswf.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="libfile" Source="libfile.vcproj" Description="Converting project file 'E:\programming\LiquidFL\current\gameswf\win32\VC10\libfile.vcproj'.">
+</Event><Event ErrorLevel="1" Project="libfile" Source="libfile.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="libfile" Source="libfile.vcproj" Description="VCConvertEngine could not convert attribute UseUnicodeResponseFiles = false under Tool VCCLCompilerTool.">
+</Event><Event ErrorLevel="1" Project="libfile" Source="libfile.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="libfile" Source="libfile.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="0" Project="libfile" Source="libfile.vcproj" Description="Done converting to new project file 'E:\programming\LiquidFL\current\gameswf\win32\VC10\libfile.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="libfile" Source="libfile.vcproj" Description="Converted">
+</Event><Event ErrorLevel="3" Project="freetype" Source="..\..\..\libs\freetype\builds\win32\vc2008\freetype.vcproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="" Source="gameswf.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="gameswf.sln" Description="Converted">
+</Event></UpgradeLog>

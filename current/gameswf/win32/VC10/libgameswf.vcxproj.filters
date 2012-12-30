@@ -1,0 +1,1080 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="as_classes">
+      <UniqueIdentifier>{89c95bdd-bcac-4529-887b-f8af24b1879e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{b732bfdc-63d7-415a-9abd-e620df1ac026}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tags">
+      <UniqueIdentifier>{18833637-8761-4716-8078-661264428ad2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base">
+      <UniqueIdentifier>{9f03f8ce-5efb-4dac-87fd-a7df1e589914}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="http client">
+      <UniqueIdentifier>{9c2482ac-a1c2-4fa2-89b9-ee9a31f41e04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib3ds-extension">
+      <UniqueIdentifier>{ff55bc15-ae0f-451c-9a69-f1984ebd8cba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="JIT-compiler">
+      <UniqueIdentifier>{f93f3dbd-d56c-4e99-83aa-92760cb9107b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sound">
+      <UniqueIdentifier>{b47c8702-f561-4dd5-84bd-b430c32cf731}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="renderers">
+      <UniqueIdentifier>{f6b58a71-8870-4e1d-b23c-1b1132032d02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="renderers\ogl">
+      <UniqueIdentifier>{ef6f19c7-4904-46c3-94d1-464844806615}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="renderers\ogles">
+      <UniqueIdentifier>{01654d2f-4bce-48a2-8e26-a6474e4758a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="renderers\d3d">
+      <UniqueIdentifier>{dda8a02b-c650-4eb3-a18b-3723f98585ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="renderers\xbox">
+      <UniqueIdentifier>{0f03eab0-998d-4a1d-9460-5e3102f7ceda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs">
+      <UniqueIdentifier>{293798d2-2310-4065-8cf8-2553bbb42de2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\zlib">
+      <UniqueIdentifier>{d905b71d-f0bd-4417-8b6a-ddb0c7e62ac6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\zlib\src">
+      <UniqueIdentifier>{0da17bf9-0934-4151-b09b-fb6a61601ed7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\zlib\hdr">
+      <UniqueIdentifier>{d63b0487-0159-4a31-bd46-7258fc52e4f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\libpng">
+      <UniqueIdentifier>{5ffa36d5-4390-4fb0-a914-3ba36125b48a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\libpng\src">
+      <UniqueIdentifier>{8f105cdf-0c41-4d2d-a44c-42ebd1109ee1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\libpng\hdr">
+      <UniqueIdentifier>{ad82ceef-96e0-4def-a745-bb5cae442fe2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\libjpeg">
+      <UniqueIdentifier>{b8e171d4-f43f-4706-a39e-3d76c73507f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\libjpeg\src">
+      <UniqueIdentifier>{1a01d85f-e2cf-4597-90b8-1eaa1d704727}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\libjpeg\hdr">
+      <UniqueIdentifier>{853f90da-eacb-4982-bd96-b290153e2cc3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\gameswf_as_classes\as_array.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_boolean.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_broadcaster.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_class.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_color.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_color_transform.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_date.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_event.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_flash.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_geom.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_global.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_key.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_loadvars.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_math.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_matrix.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_mcloader.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_mouse.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_mouse_event.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_netconnection.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_netstream.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_number.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_point.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_selection.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_sharedobject.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_sound.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_string.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_textformat.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_transform.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_classes\as_xmlsocket.cpp">
+      <Filter>as_classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_abc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_action.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_as_sprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_avm2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_canvas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_character.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_disasm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_dlist.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_environment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_filters.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_font.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_fontlib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_freetype.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_function.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_listener.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_log.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_morph2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_movie_def.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_mutex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_render.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_root.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_shape.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_sound.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_sprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_sprite_def.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_stream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_styles.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_tesselate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_text.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_tools.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_types.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_value.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_video_impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lfl_TAG_PlaceObject2_impl.cpp">
+      <Filter>Source Files\Tags</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lfl_TAG_ScriptLimits_impl.cpp">
+      <Filter>Source Files\Tags</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\container.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\ear_clip_triangulate_float.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\ear_clip_triangulate_sint16.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\file_util.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\image.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\image_filters.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\jpeg.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\logger.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\membuf.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\png_helper.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\triangulate_float.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\triangulate_sint32.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\tu_file.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\tu_file_SDL.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\tu_loadlib.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\tu_random.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\tu_timer.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\tu_types.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\utf8.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\utility.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\zlib_adapter.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\http_client.cpp">
+      <Filter>http client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\http_helper.cpp">
+      <Filter>http client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\net_interface_tcp.cpp">
+      <Filter>http client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\tu_net_file.cpp">
+      <Filter>http client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\extensions\lib3ds\gameswf_3ds_def.cpp">
+      <Filter>lib3ds-extension</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\extensions\lib3ds\gameswf_3ds_inst.cpp">
+      <Filter>lib3ds-extension</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_avm2_jit.cpp">
+      <Filter>JIT-compiler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_jit.cpp">
+      <Filter>JIT-compiler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_jit_opcode.cpp">
+      <Filter>JIT-compiler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_sound_handler_openal.cpp">
+      <Filter>sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gameswf_sound_handler_sdl.cpp">
+      <Filter>sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\renderers\ogl\gameswf_render_handler_ogl.cpp">
+      <Filter>renderers\ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\renderers\ogles\gameswf_render_handler_ogles.cpp">
+      <Filter>renderers\ogles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\zlib\adler32.c">
+      <Filter>libs\zlib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\zlib\compress.c">
+      <Filter>libs\zlib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\zlib\crc32.c">
+      <Filter>libs\zlib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\zlib\deflate.c">
+      <Filter>libs\zlib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\zlib\gzclose.c">
+      <Filter>libs\zlib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\zlib\gzlib.c">
+      <Filter>libs\zlib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\zlib\gzread.c">
+      <Filter>libs\zlib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\zlib\gzwrite.c">
+      <Filter>libs\zlib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\zlib\infback.c">
+      <Filter>libs\zlib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\zlib\inffast.c">
+      <Filter>libs\zlib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\zlib\inflate.c">
+      <Filter>libs\zlib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\zlib\inftrees.c">
+      <Filter>libs\zlib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\zlib\trees.c">
+      <Filter>libs\zlib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\zlib\uncompr.c">
+      <Filter>libs\zlib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\zlib\zutil.c">
+      <Filter>libs\zlib\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libpng\png.c">
+      <Filter>libs\libpng\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libpng\pngerror.c">
+      <Filter>libs\libpng\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libpng\pnggccrd.c">
+      <Filter>libs\libpng\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libpng\pngget.c">
+      <Filter>libs\libpng\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libpng\pngmem.c">
+      <Filter>libs\libpng\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libpng\pngpread.c">
+      <Filter>libs\libpng\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libpng\pngread.c">
+      <Filter>libs\libpng\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libpng\pngrio.c">
+      <Filter>libs\libpng\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libpng\pngrtran.c">
+      <Filter>libs\libpng\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libpng\pngrutil.c">
+      <Filter>libs\libpng\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libpng\pngset.c">
+      <Filter>libs\libpng\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libpng\pngtrans.c">
+      <Filter>libs\libpng\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libpng\pngvcrd.c">
+      <Filter>libs\libpng\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libpng\pngwio.c">
+      <Filter>libs\libpng\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libpng\pngwrite.c">
+      <Filter>libs\libpng\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libpng\pngwtran.c">
+      <Filter>libs\libpng\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libpng\pngwutil.c">
+      <Filter>libs\libpng\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jaricom.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jcapimin.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jcapistd.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jcarith.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jccoefct.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jccolor.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jcdctmgr.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jchuff.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jcinit.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jcmainct.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jcmarker.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jcmaster.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jcomapi.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jcparam.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jcprepct.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jcsample.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jctrans.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jdapimin.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jdapistd.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jdarith.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jdatadst.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jdatasrc.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jdcoefct.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jdcolor.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jddctmgr.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jdhuff.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jdinput.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jdmainct.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jdmarker.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jdmaster.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jdmerge.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jdpostct.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jdsample.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jdtrans.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jerror.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jfdctflt.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jfdctfst.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jfdctint.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jidctflt.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jidctfst.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jidctint.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jmemansi.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jmemmgr.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jquant1.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jquant2.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\jutils.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\rdbmp.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\rdcolmap.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\rdgif.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\rdppm.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\rdrle.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\rdswitch.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\rdtarga.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\transupp.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\wrbmp.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\wrgif.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\wrppm.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\wrrle.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libs\libjpeg\wrtarga.c">
+      <Filter>libs\libjpeg\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\gameswf_as_classes\as_array.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_boolean.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_broadcaster.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_class.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_color.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_color_transform.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_date.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_event.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_flash.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_geom.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_global.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_key.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_loadvars.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_math.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_matrix.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_mcloader.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_mouse.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_mouse_event.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_netconnection.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_netstream.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_number.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_point.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_selection.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_sharedobject.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_sound.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_string.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_textformat.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_transform.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_classes\as_xmlsocket.h">
+      <Filter>as_classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_abc.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_action.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_as_sprite.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_avm2.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_button.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_canvas.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_character.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_disasm.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_dlist.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_environment.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_filters.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_font.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_fontlib.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_freetype.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_function.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_impl.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_listener.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_log.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_morph2.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_movie.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_movie_def.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_mutex.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_object.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_player.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_render.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_root.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_shape.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_sound.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_sprite.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_sprite_def.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_stream.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_styles.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_tesselate.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_text.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_types.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_value.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_video_impl.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lfl_actions_def.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lfl_as_opcodes.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lfl_execute_tag.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lfl_key_handling.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lfl_swf_event.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lfl_tag_defines.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\tu_queue.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lfl_TAG_PlaceObject2_impl.h">
+      <Filter>Source Files\Tags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lfl_TAG_ScriptLimits_impl.h">
+      <Filter>Source Files\Tags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\container.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\cschema.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\ear_clip_triangulate.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\ear_clip_triangulate_impl.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\file_util.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\grid_index.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\image.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\jpeg.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\lfl_platform.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\logger.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\membuf.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\png_helper.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\smart_ptr.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\triangulate.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\triangulate_impl.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\tu_config.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\tu_file.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\tu_gc.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\tu_gc_singlethreaded_refcount.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\tu_loadlib.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\tu_math.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\tu_memdebug.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\tu_opengl_includes.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\tu_random.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\tu_swap.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\tu_timer.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\tu_types.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\utf8.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\utility.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\vert_types.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\zlib_adapter.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\http_client.h">
+      <Filter>http client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\http_helper.h">
+      <Filter>http client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\net_interface.h">
+      <Filter>http client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\net_interface_tcp.h">
+      <Filter>http client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\tu_net_file.h">
+      <Filter>http client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\extensions\lib3ds\gameswf_3ds_def.h">
+      <Filter>lib3ds-extension</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\extensions\lib3ds\gameswf_3ds_inst.h">
+      <Filter>lib3ds-extension</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\platforms\gameswf_jit_x86.h">
+      <Filter>JIT-compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\platforms\gameswf_jit_x86.hpp">
+      <Filter>JIT-compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_sound_handler_openal.h">
+      <Filter>sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gameswf_sound_handler_sdl.h">
+      <Filter>sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\zlib\crc32.h">
+      <Filter>libs\zlib\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\zlib\deflate.h">
+      <Filter>libs\zlib\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\zlib\gzguts.h">
+      <Filter>libs\zlib\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\zlib\inffast.h">
+      <Filter>libs\zlib\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\zlib\inffixed.h">
+      <Filter>libs\zlib\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\zlib\inflate.h">
+      <Filter>libs\zlib\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\zlib\inftrees.h">
+      <Filter>libs\zlib\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\zlib\trees.h">
+      <Filter>libs\zlib\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\zlib\zconf.h">
+      <Filter>libs\zlib\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\zlib\zlib.h">
+      <Filter>libs\zlib\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\zlib\zutil.h">
+      <Filter>libs\zlib\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\libpng\png.h">
+      <Filter>libs\libpng\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\libpng\pngconf.h">
+      <Filter>libs\libpng\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\libjpeg\cderror.h">
+      <Filter>libs\libjpeg\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\libjpeg\jdct.h">
+      <Filter>libs\libjpeg\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\libjpeg\jerror.h">
+      <Filter>libs\libjpeg\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\libjpeg\jinclude.h">
+      <Filter>libs\libjpeg\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\libjpeg\jmemsys.h">
+      <Filter>libs\libjpeg\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\libjpeg\jmorecfg.h">
+      <Filter>libs\libjpeg\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\libjpeg\jpegint.h">
+      <Filter>libs\libjpeg\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\libjpeg\jpeglib.h">
+      <Filter>libs\libjpeg\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\libjpeg\jversion.h">
+      <Filter>libs\libjpeg\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\libjpeg\transupp.h">
+      <Filter>libs\libjpeg\hdr</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

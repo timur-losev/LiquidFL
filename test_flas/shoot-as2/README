@@ -1,0 +1,32 @@
+                        Shoot: The Shootorial Game
+
+Shootorial
+----------
+This package contains the full ActionScript 2.0 source and assets for the
+ActionScript 2.0 version of Shoot: The Shootorial Game [1].
+
+The Shootorials [2] are a set of Flash game programming tutorials designed to
+walk a beginner through the process of making a simple side scrolling shooter
+game. The source code for each Shootorial is available via a download link on
+the web page containing the Shootorial. Aspiring game developers interested in
+learning the basics can use that source code as a spring board for making
+Flash games using ActionScript 2.0. 
+
+Shoot: The Shootorial Game is an example of the type of game you can build
+after completing the Shootorials. 
+
+Downloading
+-----------
+This package can be downloaded from http://www.kongregate.com/labs.
+
+License
+-------
+All source code (ActionScript, swf and fla files) are licensed under the BSD3
+license [3]. A copy of the BSD license is included with the source code. All
+other assets (images, audio files) are licensed under the Creative Commons
+Attribution 3.0 Unported License (cc by) [4].
+
+[1] http://www.kongregate.com/games/Kongregate/shoot-the-shootorial-game 
+[2] http://www.kongregate.com/labs
+[3] http://creativecommons.org/licenses/BSD/
+[4] http://creativecommons.org/licenses/by/3.0/

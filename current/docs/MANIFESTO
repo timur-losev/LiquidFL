@@ -1,0 +1,19 @@
+TESTBED MANIFESTO
+Thatcher Ulrich <tu@tulrich.com> http://tulrich.com
+
+I have put this project in the public domain.  I considered using one
+of the standard licenses such as GPL, LGPL or Berkeley/X, but one of
+my primary goals with this work is to make it as easy as possible to
+reuse.  For various reasons, not all of them bad, much of game
+development takes place in a closed-source environment.
+
+Reinventing the wheel is only fun once; after that it's tedious and
+annoying.  Having worked for several different companies on
+closed-source projects and reinvented several wheels, I want to make
+sure that work I do on my own time will continue to be available to me
+for use both in personal and professional projects, no matter what the
+licensing status or openness of those projects might be.
+
+Likewise I've found it highly satisfying when I've released code that
+helped other people's projects.  Placing this project in the public
+domain lowers the barrier for others to adopt it.

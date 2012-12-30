@@ -1,0 +1,80 @@
+Some observations on game engines
+
+
+Good Policies
+=============
+
+* content errors should never assert; should always log an error
+
+* error logs should be easily separable from generic info logs
+  (ideally via grep)
+
+* in-game content updates are tremendously good (i.e. see content
+  changes quickly w/out restarting the game)
+
+* external live tweaking tools are good
+
+
+Game Data Schemas & Binding
+===========================
+
+I've never seen this done "well".  The problem is, getting data from
+the editing tools into the game, and similarly, supporting game save &
+restore.  Also relates to live tweaking and content updates.
+
+The usual solutions include some kind of xml/lisp/text tag files for
+non-binary-ish content, using either:
+
+* lots of handmade binding code to extract the data (handmade bindings
+  are BAD)
+
+* macro plumbing to bind things semi-automatically (complex, doesn't
+  totally eliminate hand-work)
+
+* some automatically generated binding (e.g. tolua, SWIG).
+
+The more automatic solutions interact with your type system and have
+lots of implications and complexity.
+
+Thoughts:
+
+* automatic bindings sound like the slickest.  Never actually used it
+  in production; are there bad drawbacks?
+
+* low-tech alternative is binary dumps of C structs.  Obvious
+  drawbacks.  Is there a slick way to have versioning, that's not
+  worse than the usual handmade crud?  I can't think of any.
+
+* binary dumps are at least relatively fast.  How to make slicker
+  solutions fast?
+
+* pointer hookup for game save/load needs linker-like fixup pass or
+  stop-and-copy style traversal, or, handle-like references.  For
+  initial load from tools, text labels are probably more robust &
+  friendly.  GUID's in content files should die, as far as I'm
+  concerned.
+
+Is this any good:
+  
+* Do binary dumps.  In non-final builds, save the tolua-ish schema as
+  well, with some kind of version hash.
+
+* At load time, if schema hashes match, then do binary read.  If
+  hashes don't match, then read the schema and do a slow, safe load w/
+  defaults (and spew some warnings I guess).
+
+Seems pretty good.  Should work for tools output as well.  With the
+schemas handy, they can be used for live tweaking too.
+
+Problem: how to do pointer fixup?  Options:
+
+* Keep pointer schemas, even in final builds.
+
+* Fixed-location heap, so no fixup necessary.  Probably OK for
+  consoles; but this sounds like a loser for content tools.
+
+* Always store handles instead of pointers.  Sounds like a pain, but
+  maybe it's not so terrible.
+
+Is is better to solve save/load and content load with one system, or
+treat them separately?

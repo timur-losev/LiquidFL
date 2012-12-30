@@ -1,0 +1,251 @@
+# make configuration for the tu-testbed engine library
+
+
+# If you haven't set TU_TESTBED_COMPILER, then take a guess at its value
+# based on the OSTYPE env variable.
+#
+# If you want to use a particular compiler; for example gcc-3.0, then
+# set the environment variable TU_TESTBED_COMPILER to the compiler
+# name.
+ifndef TU_TESTBED_COMPILER
+	ifndef $(OSTYPE)
+		OSTYPE = $(shell uname)
+	endif
+	OSTYPE := $(patsubst Linux, linux, $(OSTYPE))
+	OSTYPE := $(patsubst Darwin, darwin, $(OSTYPE))
+
+# default to msvc
+	TU_TESTBED_COMPILER = msvc
+
+	ifneq (,$(findstring linux, $(OSTYPE)))
+		HAVE_GCC_3 := 1
+#		If Command-Line specified-compiler...
+		ifdef $(CC)
+			TU_TESTBED_COMPILER = $(CC)
+		else
+			TU_TESTBED_COMPILER = gcc
+		endif
+	endif
+
+	ifneq (,$(findstring darwin, $(OSTYPE)))
+		HAVE_GCC_DARVIN := 1
+		TU_TESTBED_COMPILER = gcc3
+	endif
+endif
+
+
+# If you have libmad installed
+# (http://www.underbit.com/products/mad/), and you want to compile
+# gameswf with mp3 support, uncomment below.  Note that libmad is
+# GPL'd, so if you want to distribute binaries based on this, you must
+# distribute the associated source under GPL as well.
+#GAMESWF_MP3_SUPPORT=-DGAMESWF_MP3_SUPPORT=1
+##LIBMAD_LIB=-lmad
+#LIBMAD_LIB=../../libmad-0.15.1b/msvc++/Release/libmad.lib
+#LIBMAD_INCLUDE=-I../../libmad-0.15.1b
+
+
+ifeq ($(TU_TESTBED_COMPILER), msvc)
+
+#
+# MSVC/Windows options
+#
+
+
+# Uncomment this option if you're saddled with an old version of
+# MSVCRT.  Newer versions of MSVCRT's malloc perform about the same as
+# dlmalloc.
+#USE_DL_MALLOC_FLAG := -DUSE_DL_MALLOC
+
+# MSVC
+CC := cl /nologo
+AR := lib /NOLOGO
+#LINK := link /nologo
+LIB_OUT_FLAG := /OUT:
+LIB_EXT := lib
+LIB_PRE :=
+OBJ_EXT := obj
+EXE_EXT := .exe
+DLL_EXT := dll
+SDL_DIR := $(TOP)/../../../SDL-1.2.7
+SDL_CFLAGS := -I "$(SDL_DIR)/include"
+SDL_LIBS := winmm.lib kernel32.lib user32.lib gdi32.lib # dxguid.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib
+SDL_MIXER_INCLUDE := -I$(TOP)/../../../SDL_mixer-1.2.5/include
+SDL_MIXER_LIB := $(TOP)/../../../SDL_mixer-1.2.5/lib/SDL_mixer.lib
+
+SOCKET_LIBS := wsock32.lib ws2_32.lib
+
+LIBS := opengl32.lib glu32.lib $(SDL_DIR)/lib/SDLmain.lib $(SDL_DIR)/lib/SDL.lib gdi32.lib oldnames.lib $(SDL_LIBS)
+CFLAGS := $(CFLAGS) /MD -GR -GX -DWIN32=1 -D_WIN32=1 $(USE_DL_MALLOC_FLAG) -W3 -WX $(SDL_CFLAGS) $(GAMESWF_MP3_SUPPORT)
+LDFLAGS := /link /NODEFAULTLIB:libc.lib /NODEFAULTLIB:libcd.lib /NODEFAULTLIB:msvcprt.lib /INCREMENTAL:NO /subsystem:console
+# Uncomment these definitions if you want to use libxml on win32.
+# LIBS := opengl32.lib glu32.lib wsock32.lib $(SDL_DIR)/lib/SDLmain.lib $(SDL_DIR)/lib/SDL.lib gdi32.lib oldnames.lib $(SDL_LIBS)
+# CFLAGS := $(CFLAGS) /MD -GR -GX -DWIN32=1 -D_WIN32=1 -DHAVE_LIBXML=1 -DLIBXML_HTTP_ENABLED $(USE_DL_MALLOC_FLAG) -W3 $(SDL_CFLAGS) $(GAMESWF_MP3_SUPPORT) -
+# ICONV_DIR := $(TOP)/../../../iconv-1.9.1.win32
+# XML2_DIR := $(TOP)/../../../libxml2-2.6.19.win32
+# XML2_INCLUDE := -I$(XML2_DIR)/include -I$(ICONV_DIR)/include
+# XML2LIB := $(XML2_DIR)/lib/libxml2.$(LIB_EXT) $(ICONV_DIR)/lib/iconv.$(LIB_EXT)+
+# CFLAGS += -DHAVE_WINSOCK -DHAVE_LIBXML
+
+LIBPNG_DIR := $(TOP)/../../../libpng-1.2.8
+LIBPNG_INCLUDE := -I$(LIBPNG_DIR)
+LIBPNG := $(LIBPNG_DIR)/libpng.$(LIB_EXT)
+
+ZLIB_DIR := $(TOP)/../../../zlib-1.2.2
+ZLIB_INCLUDE := -I$(ZLIB_DIR)
+ZLIB := $(ZLIB_DIR)/zlib.$(LIB_EXT)
+
+JPEGLIB_DIR := $(TOP)/../../../jpeg-6b
+JPEGLIB_INCLUDE := -I$(JPEGLIB_DIR)
+JPEGLIB := $(JPEGLIB_DIR)/libjpeg.$(LIB_EXT)
+
+ifeq ($(DEBUG),1)
+	# msvc debug flags
+	CC_DEBUG_FLAGS := -Zi -Od
+	LDFLAGS := msvcrtd.lib -Zi $(LDFLAGS) -DEBUG /NODEFAULTLIB:msvcrt.lib
+	MAKE_DLL := cl /nologo /LDd
+else
+	# msvc non-debug flags
+	CC_DEBUG_FLAGS := -Ox -DNDEBUG=1 -Zi
+	LDFLAGS := -Zi msvcrt.lib $(LDFLAGS) /NODEFAULTLIB:msvcrtd.lib
+	MAKE_DLL := cl /nologo /LD
+endif
+endif
+
+ifeq ($(HAVE_GCC_3),1)
+
+# GCC
+CC := $(TU_TESTBED_COMPILER)
+AR := ar -rcus
+LIB_OUT_FLAG :=
+LIB_PRE := lib
+LIB_EXT := a
+OBJ_EXT := o
+EXE_EXT :=
+DLL_EXT := so
+LIBS := -lSDL -lGL -lGLU -lm
+DLL_LIBS := -ldl
+SDL_CFLAGS := $(shell sdl-config --cflags)
+SDL_LDFLAGS := $(shell sdl-config --libs)
+SDL_MIXER_INCLUDE := 
+SDL_MIXER_LIB := -lSDL_mixer
+CFLAGS := $(CFLAGS) $(SDL_CFLAGS) -fpic -Wall $(GAMESWF_MP3_SUPPORT)
+LDFLAGS := -lGL -lGLU -lstdc++
+MAKE_DLL := gcc -shared
+
+# On Unix-like machines, these libraries are usually installed in
+# standard locations.
+
+#LIBPNG_DIR := $(TOP)/../../../libpng
+#LIBPNG_INCLUDE := $(LIBPNG_DIR)
+LIBPNG := -lpng
+
+#ZLIB_DIR := $(TOP)/../../../zlib
+ZLIB_INCLUDE :=
+ZLIB := -lz
+
+#JPEGLIB_DIR := $(TOP)/../../../jpeg-6b
+JPEGLIB_INCLUDE :=
+JPEGLIB := -ljpeg
+
+ifeq ($(DEBUG), 1)
+	# gcc debug flags
+	CC_DEBUG_FLAGS := -g
+	LDFLAGS := $(LDFLAGS) -g
+else
+	# gcc non-debug flags
+	CC_DEBUG_FLAGS := -O2 -DNDEBUG=1 -ffast-math -fexpensive-optimizations -fomit-frame-pointer
+endif
+
+endif # GCC
+
+
+ifeq ($(HAVE_GCC_DARVIN),1)
+# make configuration for the tu-testbed engine library
+# use this if compiling for linux
+
+CC := $(TU_TESTBED_COMPILER)
+AR := ar -r -s
+LIB_OUT_FLAG :=
+LIB_PRE := lib
+LIB_EXT := a
+OBJ_EXT := o
+EXE_EXT :=
+DLL_EXT := so
+LIBS := -lSDL -lm -lstdc++
+DLL_LIBS := -ldl
+SDL_CFLAGS := $(shell sdl-config --cflags)
+SDL_LDFLAGS := $(shell sdl-config --libs)
+CFLAGS := $(CFLAGS) $(SDL_CFLAGS) -fPIC -Wall $(GAMESWF_MP3_SUPPORT)
+LDFLAGS := -lstdc++
+MAKE_DLL := gcc3 -shared
+
+# On Unix-like machines, these libraries are usually installed in
+# standard locations.
+
+LIBPNG_DIR := $(TOP)/../../../libpng
+LIBPNG_INCLUDE := -I$(LIBPNG_DIR)
+LIBPNG := $(LIBPNG_DIR)/libpng.$(LIB_EXT)
+
+ZLIB_DIR := $(TOP)/../../../zlib
+ZLIB_INCLUDE := -I$(ZLIB_DIR)
+ZLIB := $(ZLIB_DIR)/libz.$(LIB_EXT)
+
+JPEGLIB_DIR := $(TOP)/../../../jpeg-6b
+JPEGLIB_INCLUDE := -I$(JPEGLIB_DIR)
+JPEGLIB := $(JPEGLIB_DIR)/libjpeg.$(LIB_EXT)
+
+
+ifeq ($(DEBUG), 1)
+	# gcc debug flags
+	CC_DEBUG_FLAGS := -g
+	LDFLAGS := $(LDFLAGS) -g
+else
+	# gcc non-debug flags
+	CC_DEBUG_FLAGS := -O2 -DNDEBUG=1 -ffast-math -fexpensive-optimizations -fomit-frame-pointer
+endif
+endif  # gcc3
+
+
+ifeq ($(TU_TESTBED_COMPILER), msvc)
+%.$(OBJ_EXT): %.cpp
+	$(CC) -c $< -Fo$@ $(CFLAGS)
+
+%.$(OBJ_EXT): %.c
+	$(CC) -c $< -Fo$@ $(CFLAGS)
+else
+%.$(OBJ_EXT): %.cpp
+	$(CC) -c $< -o $@ $(CFLAGS)
+
+%.$(OBJ_EXT): %.c
+	$(CC) -c $< -o $@ $(CFLAGS)
+endif
+
+BASE_LIB := $(TOP)/base/$(LIB_PRE)base.$(LIB_EXT)
+GEOMETRY_LIB := $(TOP)/geometry/$(LIB_PRE)geometry.$(LIB_EXT)
+NET_LIB := $(TOP)/net/$(LIB_PRE)net.$(LIB_EXT)
+ENGINE_INCLUDE := -I$(TOP)
+
+
+all:
+
+base_lib:
+	make -C $(TOP)/base
+base_clean:
+	make -C $(TOP)/base clean
+
+net_lib:
+	make -C $(TOP)/net
+net_clean:
+	make -C $(TOP)/net clean
+
+geometry_lib:
+	make -C $(TOP)/geometry
+geometry_clean:
+	make -C $(TOP)/geometry clean
+
+
+
+# Local Variables:
+# mode: Makefile
+# End:

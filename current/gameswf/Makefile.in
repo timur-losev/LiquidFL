@@ -1,0 +1,313 @@
+# Makefile	-- Thatcher Ulrich <tu@tulrich.com> 2003
+
+# This source code has been donated to the Public Domain.  Do
+# whatever you want with it.
+
+include ../config.mk
+
+# Makefile for gameswf library & tests.
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = $(srcdir)
+
+# This only gets defined if --enable-pthreads is passed to configure
+# and libpthreads exists. Otherwise it is null, and gets ignored.
+PTHREAD_LIB = @PTHREAD_LIB@
+PTHREAD_SRCS := $(shell \
+  if [ -f $(objdir)/../binutils/ar ] ; then \
+    echo $(objdir)/../binutils/ar ; \
+  else \
+      echo $(AR); \
+  fi)
+
+INCLUDES := -I.. \
+	-I$(top_srcdir) \
+	$(ENGINE_INCLUDE) \
+	$(ZLIB_CFLAGS) \
+	$(SDL_MIXER_CFLAGS) \
+	$(LIBMAD_INCLUDE) \
+	$(LIBXML_CFLAGS)
+
+DMALLOC_LIB = @DMALLOC_LIB@
+
+CPPFLAGS := $(CFLAGS) $(SDL_CFLAGS) $(SDL_MIXER_CFLAGS) $(INCLUDES) $(CC_DEBUG_FLAGS) -g
+# LDFLAGS := $(SDL_LIBS) $(OPENGL_LIBS) $(GLU_LIBS) $(LIB_DEBUG_FLAGS) $(LDFLAGS)
+LDFLAGS := -L../base -lbase \
+	$(OPENGL_LIBS)      \
+	$(GLU_LIBS)         \
+	$(SDL_LIBS)         \
+	$(SDL_MIXER_LIBS)   \
+	$(LIB_DEBUG_FLAGS)  \
+	$(LIBXML_LIBS)
+
+
+LIB_OUT = $(LIB_PRE)gameswf.$(LIB_EXT)
+EXE_OUT = gameswf_test_ogl$(EXE_EXT)
+PARSER_OUT = gameswf_parser$(EXE_EXT)
+PROCESSOR_OUT = gameswf_processor$(EXE_EXT)
+
+LIBS := $(LIB_OUT)       \
+	$(BASE_LIB)      \
+	$(LIBS)          \
+	$(JPEGLIB)       \
+	$(ZLIB)		 \
+	$(SDL_MIXER_LIB) \
+	$(PTHREAD_LIB)   \
+	$(LIBMAD_LIB)
+
+all: $(LIB_OUT) $(EXE_OUT) $(PARSER_OUT) $(PROCESSOR_OUT)
+
+
+LIB_OBJS = \
+	gameswf_textformat.$(OBJ_EXT)	\
+	gameswf_timers.$(OBJ_EXT)	\
+	gameswf_xml.$(OBJ_EXT)	        \
+	gameswf_movie.$(OBJ_EXT)	\
+	gameswf_xmlsocket.$(OBJ_EXT)	\
+	gameswf_string.$(OBJ_EXT)	\
+	gameswf_action.$(OBJ_EXT)	\
+	gameswf_button.$(OBJ_EXT)	\
+	gameswf_dlist.$(OBJ_EXT)	\
+	gameswf_font.$(OBJ_EXT)		\
+	gameswf_fontlib.$(OBJ_EXT)	\
+	gameswf_impl.$(OBJ_EXT)		\
+	gameswf_log.$(OBJ_EXT)		\
+	gameswf_morph2.$(OBJ_EXT)	\
+	gameswf_render.$(OBJ_EXT)	\
+	gameswf_shape.$(OBJ_EXT)	\
+	gameswf_sound.$(OBJ_EXT)	\
+	gameswf_stream.$(OBJ_EXT)	\
+	gameswf_styles.$(OBJ_EXT)	\
+	gameswf_tesselate.$(OBJ_EXT)	\
+	gameswf_text.$(OBJ_EXT)		\
+	gameswf_types.$(OBJ_EXT)
+
+TEST_PROGRAM_OBJS = \
+	gameswf_test_ogl.$(OBJ_EXT)		\
+	gameswf_render_handler_ogl.$(OBJ_EXT)	\
+	gameswf_sound_handler_sdl.$(OBJ_EXT)	\
+	gameswf_sound_handler_mp3.$(OBJ_EXT)
+
+PARSER_OBJS = \
+	gameswf_parser.$(OBJ_EXT) 
+
+PROCESSOR_OBJS = \
+	gameswf_processor.$(OBJ_EXT)
+
+OBJS = $(LIB_OBJS) $(TEST_PROGRAM_OBJS) $(PARSER_OBJS) $(PROCESSOR_OBJS)
+
+gameswf_impl.$(OBJ_EXT): gameswf.h gameswf_impl.h gameswf_types.h
+
+# Rebuild everything completely, but with GCC 4.x Mudflap support
+mudflap:
+	@echo "Rebuilding with GCC Mudflap support"
+	$(MAKE) clean all CFLAGS="$(CFLAGS) -fmudflap" LDFLAGS="$(LDFLAGS) -lmudflap"
+
+$(LIB_OUT): $(LIB_OBJS)
+	$(AR) $(AR_FLAGS) $(LIB_OUT_FLAG)$@ $^
+
+
+$(EXE_OUT): $(TEST_PROGRAM_OBJS) $(LIB_OUT) $(BASE_LIB)
+	$(CXX) -o $@ $(TEST_PROGRAM_OBJS) $(LIBS) $(LDFLAGS) -L. -lgameswf $(DMALLOC_LIB)
+
+
+$(PARSER_OUT): $(PARSER_OBJS) $(LIB_OUT) $(BASE_LIB)
+	$(CXX) -o $@ $(PARSER_OBJS) $(LIBS) $(LDFLAGS) -L. -lgameswf $(DMALLOC_LIB)
+
+
+$(PROCESSOR_OUT): $(PROCESSOR_OBJS) $(LIB_OUT) $(BASE_LIB)
+	$(CXX) -o $@ $(PROCESSOR_OBJS) $(LIBS) $(LDFLAGS) -L. -lgameswf $(DMALLOC_LIB)
+
+clean:
+	@-rm $(OBJS) $(LIB_OUT) $(EXE_OUT) $(PARSER_OUT) $(PROCESSOR_OUT)
+
+depend:
+	makedepend -Y -I.. -f Makefile.in *.cpp
+
+fresh: clean all
+
+# DO NOT DELETE
+
+gameswf_action.o: gameswf_action.h gameswf.h gameswf_types.h
+gameswf_action.o: ../gameswf/gameswf.h ../base/tu_types.h ../base/tu_config.h
+gameswf_action.o: ../compatibility_include.h ../base/dlmalloc.h
+gameswf_action.o: ../base/container.h ../base/utility.h ../base/tu_math.h
+gameswf_action.o: ../base/tu_swap.h gameswf_impl.h gameswf_log.h
+gameswf_action.o: ../base/smart_ptr.h gameswf_stream.h ../base/tu_random.h
+gameswf_action.o: gameswf_string.h gameswf_movie.h gameswf_timers.h
+gameswf_action.o: ../base/tu_timer.h gameswf_textformat.h gameswf_sound.h
+gameswf_button.o: gameswf_button.h gameswf_impl.h gameswf.h gameswf_action.h
+gameswf_button.o: gameswf_types.h ../gameswf/gameswf.h ../base/tu_types.h
+gameswf_button.o: ../base/tu_config.h ../compatibility_include.h
+gameswf_button.o: ../base/dlmalloc.h ../base/container.h ../base/utility.h
+gameswf_button.o: ../base/tu_math.h ../base/tu_swap.h gameswf_log.h
+gameswf_button.o: ../base/smart_ptr.h gameswf_sound.h gameswf_render.h
+gameswf_button.o: ../base/image.h gameswf_stream.h
+gameswf_dlist.o: gameswf_dlist.h ../base/container.h ../base/tu_config.h
+gameswf_dlist.o: ../compatibility_include.h ../base/dlmalloc.h
+gameswf_dlist.o: ../base/utility.h ../base/tu_math.h ../base/tu_types.h
+gameswf_dlist.o: ../base/tu_swap.h gameswf_types.h ../gameswf/gameswf.h
+gameswf_dlist.o: gameswf_impl.h gameswf.h gameswf_action.h gameswf_log.h
+gameswf_dlist.o: ../base/smart_ptr.h gameswf_render.h ../base/image.h
+gameswf_font.o: gameswf_font.h ../base/container.h ../base/tu_config.h
+gameswf_font.o: ../compatibility_include.h ../base/dlmalloc.h
+gameswf_font.o: ../base/utility.h ../base/tu_math.h ../base/tu_types.h
+gameswf_font.o: ../base/tu_swap.h gameswf.h gameswf_types.h
+gameswf_font.o: ../gameswf/gameswf.h gameswf_impl.h gameswf_action.h
+gameswf_font.o: gameswf_log.h ../base/smart_ptr.h gameswf_stream.h
+gameswf_font.o: gameswf_shape.h gameswf_styles.h ../base/tu_file.h
+gameswf_fontlib.o: ../base/container.h ../base/tu_config.h
+gameswf_fontlib.o: ../compatibility_include.h ../base/dlmalloc.h
+gameswf_fontlib.o: ../base/utility.h ../base/tu_math.h ../base/tu_types.h
+gameswf_fontlib.o: ../base/tu_swap.h ../base/tu_file.h gameswf.h
+gameswf_fontlib.o: gameswf_font.h gameswf_types.h ../gameswf/gameswf.h
+gameswf_fontlib.o: gameswf_impl.h gameswf_action.h gameswf_log.h
+gameswf_fontlib.o: ../base/smart_ptr.h gameswf_render.h ../base/image.h
+gameswf_fontlib.o: gameswf_shape.h gameswf_styles.h gameswf_tesselate.h
+gameswf_impl.o: ../base/tu_file.h ../base/tu_config.h
+gameswf_impl.o: ../compatibility_include.h ../base/dlmalloc.h
+gameswf_impl.o: ../base/tu_types.h ../base/tu_swap.h ../base/utility.h
+gameswf_impl.o: ../base/tu_math.h gameswf_action.h gameswf.h gameswf_types.h
+gameswf_impl.o: ../gameswf/gameswf.h ../base/container.h gameswf_button.h
+gameswf_impl.o: gameswf_impl.h gameswf_log.h ../base/smart_ptr.h
+gameswf_impl.o: gameswf_sound.h gameswf_font.h gameswf_fontlib.h
+gameswf_impl.o: gameswf_morph2.h gameswf_shape.h gameswf_styles.h
+gameswf_impl.o: gameswf_render.h ../base/image.h gameswf_stream.h
+gameswf_impl.o: gameswf_dlist.h gameswf_timers.h ../base/tu_timer.h
+gameswf_impl.o: ../base/jpeg.h ../base/zlib_adapter.h
+gameswf_log.o: gameswf_log.h gameswf.h
+gameswf_morph2.o: gameswf_morph2.h gameswf_shape.h gameswf_styles.h
+gameswf_morph2.o: gameswf_impl.h gameswf.h gameswf_action.h gameswf_types.h
+gameswf_morph2.o: ../gameswf/gameswf.h ../base/tu_types.h ../base/tu_config.h
+gameswf_morph2.o: ../compatibility_include.h ../base/dlmalloc.h
+gameswf_morph2.o: ../base/container.h ../base/utility.h ../base/tu_math.h
+gameswf_morph2.o: ../base/tu_swap.h gameswf_log.h ../base/smart_ptr.h
+gameswf_morph2.o: gameswf_stream.h
+gameswf_morph.o: gameswf_morph.h gameswf_shape.h gameswf_styles.h
+gameswf_morph.o: gameswf_impl.h gameswf.h gameswf_action.h gameswf_types.h
+gameswf_morph.o: ../gameswf/gameswf.h ../base/tu_types.h ../base/tu_config.h
+gameswf_morph.o: ../compatibility_include.h ../base/dlmalloc.h
+gameswf_morph.o: ../base/container.h ../base/utility.h ../base/tu_math.h
+gameswf_morph.o: ../base/tu_swap.h gameswf_log.h ../base/smart_ptr.h
+gameswf_morph.o: gameswf_tesselate.h gameswf_stream.h ../base/tu_file.h
+gameswf_morph.o: gameswf_render.h ../base/image.h
+gameswf_movie.o: gameswf_movie.h gameswf_log.h gameswf_action.h gameswf.h
+gameswf_movie.o: gameswf_types.h ../gameswf/gameswf.h ../base/tu_types.h
+gameswf_movie.o: ../base/tu_config.h ../compatibility_include.h
+gameswf_movie.o: ../base/dlmalloc.h ../base/container.h ../base/utility.h
+gameswf_movie.o: ../base/tu_math.h ../base/tu_swap.h gameswf_impl.h
+gameswf_movie.o: ../base/smart_ptr.h
+gameswf_parser.o: ../base/tu_file.h ../base/tu_config.h
+gameswf_parser.o: ../compatibility_include.h ../base/dlmalloc.h
+gameswf_parser.o: ../base/tu_types.h ../base/tu_swap.h ../base/zlib_adapter.h
+gameswf_parser.o: ../base/image.h ../base/jpeg.h gameswf_stream.h
+gameswf_parser.o: ../base/container.h ../base/utility.h ../base/tu_math.h
+gameswf_parser.o: gameswf_log.h gameswf.h
+gameswf_processor.o: ../base/tu_file.h ../base/tu_config.h
+gameswf_processor.o: ../compatibility_include.h ../base/dlmalloc.h
+gameswf_processor.o: ../base/tu_types.h ../base/tu_swap.h ../base/container.h
+gameswf_processor.o: ../base/utility.h ../base/tu_math.h gameswf.h
+gameswf_render.o: gameswf_render.h gameswf_types.h ../gameswf/gameswf.h
+gameswf_render.o: ../base/tu_types.h ../base/tu_config.h
+gameswf_render.o: ../compatibility_include.h ../base/dlmalloc.h gameswf.h
+gameswf_render.o: ../base/image.h gameswf_log.h
+gameswf_render_handler_ogl.o: gameswf.h gameswf_types.h ../gameswf/gameswf.h
+gameswf_render_handler_ogl.o: ../base/tu_types.h ../base/tu_config.h
+gameswf_render_handler_ogl.o: ../compatibility_include.h ../base/dlmalloc.h
+gameswf_render_handler_ogl.o: ../base/image.h ../base/ogl.h
+gameswf_render_handler_ogl.o: ../base/tu_opengl_includes.h ../base/utility.h
+gameswf_render_handler_ogl.o: ../base/tu_math.h ../base/tu_swap.h
+gameswf_shape.o: gameswf_shape.h gameswf_styles.h gameswf_impl.h gameswf.h
+gameswf_shape.o: gameswf_action.h gameswf_types.h ../gameswf/gameswf.h
+gameswf_shape.o: ../base/tu_types.h ../base/tu_config.h
+gameswf_shape.o: ../compatibility_include.h ../base/dlmalloc.h
+gameswf_shape.o: ../base/container.h ../base/utility.h ../base/tu_math.h
+gameswf_shape.o: ../base/tu_swap.h gameswf_log.h ../base/smart_ptr.h
+gameswf_shape.o: gameswf_render.h ../base/image.h gameswf_stream.h
+gameswf_shape.o: gameswf_tesselate.h ../base/tu_file.h ../base/ogl.h
+gameswf_shape.o: ../base/tu_opengl_includes.h
+gameswf_sound.o: gameswf_sound.h gameswf_impl.h gameswf.h gameswf_action.h
+gameswf_sound.o: gameswf_types.h ../gameswf/gameswf.h ../base/tu_types.h
+gameswf_sound.o: ../base/tu_config.h ../compatibility_include.h
+gameswf_sound.o: ../base/dlmalloc.h ../base/container.h ../base/utility.h
+gameswf_sound.o: ../base/tu_math.h ../base/tu_swap.h gameswf_log.h
+gameswf_sound.o: ../base/smart_ptr.h gameswf_stream.h
+gameswf_sound_handler_sdl.o: ../gameswf/gameswf.h ../base/container.h
+gameswf_sound_handler_sdl.o: ../base/tu_config.h ../compatibility_include.h
+gameswf_sound_handler_sdl.o: ../base/dlmalloc.h ../base/utility.h
+gameswf_sound_handler_sdl.o: ../base/tu_math.h ../base/tu_types.h
+gameswf_sound_handler_sdl.o: ../base/tu_swap.h ../gameswf/gameswf_log.h
+gameswf_sound_handler_sdl.o: ../gameswf/gameswf_types.h
+gameswf_stream.o: gameswf_stream.h ../base/container.h ../base/tu_config.h
+gameswf_stream.o: ../compatibility_include.h ../base/dlmalloc.h
+gameswf_stream.o: ../base/utility.h ../base/tu_math.h ../base/tu_types.h
+gameswf_stream.o: ../base/tu_swap.h gameswf_log.h gameswf_types.h
+gameswf_stream.o: ../gameswf/gameswf.h ../base/tu_file.h
+gameswf_string.o: gameswf_string.h gameswf_log.h gameswf_action.h gameswf.h
+gameswf_string.o: gameswf_types.h ../gameswf/gameswf.h ../base/tu_types.h
+gameswf_string.o: ../base/tu_config.h ../compatibility_include.h
+gameswf_string.o: ../base/dlmalloc.h ../base/container.h ../base/utility.h
+gameswf_string.o: ../base/tu_math.h ../base/tu_swap.h gameswf_impl.h
+gameswf_string.o: ../base/smart_ptr.h
+gameswf_styles.o: gameswf_styles.h gameswf_impl.h gameswf.h gameswf_action.h
+gameswf_styles.o: gameswf_types.h ../gameswf/gameswf.h ../base/tu_types.h
+gameswf_styles.o: ../base/tu_config.h ../compatibility_include.h
+gameswf_styles.o: ../base/dlmalloc.h ../base/container.h ../base/utility.h
+gameswf_styles.o: ../base/tu_math.h ../base/tu_swap.h gameswf_log.h
+gameswf_styles.o: ../base/smart_ptr.h gameswf_render.h ../base/image.h
+gameswf_styles.o: gameswf_stream.h
+gameswf_tesselate.o: gameswf_tesselate.h gameswf.h gameswf_types.h
+gameswf_tesselate.o: ../gameswf/gameswf.h ../base/tu_types.h
+gameswf_tesselate.o: ../base/tu_config.h ../compatibility_include.h
+gameswf_tesselate.o: ../base/dlmalloc.h ../base/utility.h ../base/tu_math.h
+gameswf_tesselate.o: ../base/tu_swap.h ../base/container.h
+gameswf_test_ogl.o: gameswf.h ../base/ogl.h ../base/tu_config.h
+gameswf_test_ogl.o: ../compatibility_include.h ../base/dlmalloc.h
+gameswf_test_ogl.o: ../base/tu_opengl_includes.h ../base/utility.h
+gameswf_test_ogl.o: ../base/tu_math.h ../base/tu_types.h ../base/tu_swap.h
+gameswf_test_ogl.o: ../base/container.h ../base/tu_file.h
+gameswf_text.o: ../base/utf8.h ../base/tu_types.h ../base/tu_config.h
+gameswf_text.o: ../compatibility_include.h ../base/dlmalloc.h gameswf_impl.h
+gameswf_text.o: gameswf.h gameswf_action.h gameswf_types.h
+gameswf_text.o: ../gameswf/gameswf.h ../base/container.h ../base/utility.h
+gameswf_text.o: ../base/tu_math.h ../base/tu_swap.h gameswf_log.h
+gameswf_text.o: ../base/smart_ptr.h gameswf_shape.h gameswf_styles.h
+gameswf_text.o: gameswf_stream.h gameswf_font.h gameswf_fontlib.h
+gameswf_text.o: gameswf_render.h ../base/image.h
+gameswf_textformat.o: gameswf_textformat.h gameswf_log.h gameswf_action.h
+gameswf_textformat.o: gameswf.h gameswf_types.h ../gameswf/gameswf.h
+gameswf_textformat.o: ../base/tu_types.h ../base/tu_config.h
+gameswf_textformat.o: ../compatibility_include.h ../base/dlmalloc.h
+gameswf_textformat.o: ../base/container.h ../base/utility.h ../base/tu_math.h
+gameswf_textformat.o: ../base/tu_swap.h gameswf_impl.h ../base/smart_ptr.h
+gameswf_timers.o: gameswf_log.h gameswf_action.h gameswf.h gameswf_types.h
+gameswf_timers.o: ../gameswf/gameswf.h ../base/tu_types.h ../base/tu_config.h
+gameswf_timers.o: ../compatibility_include.h ../base/dlmalloc.h
+gameswf_timers.o: ../base/container.h ../base/utility.h ../base/tu_math.h
+gameswf_timers.o: ../base/tu_swap.h gameswf_impl.h ../base/smart_ptr.h
+gameswf_timers.o: gameswf_timers.h ../base/tu_timer.h gameswf_xml.h
+gameswf_timers.o: gameswf_xmlsocket.h
+gameswf_tools.o: ../base/tu_file.h ../base/tu_config.h
+gameswf_tools.o: ../compatibility_include.h ../base/dlmalloc.h
+gameswf_tools.o: ../base/tu_types.h ../base/tu_swap.h ../base/utility.h
+gameswf_tools.o: ../base/tu_math.h ../base/zlib_adapter.h gameswf.h
+gameswf_tools.o: gameswf_log.h gameswf_stream.h ../base/container.h
+gameswf_tools.o: gameswf_types.h ../gameswf/gameswf.h
+gameswf_types.o: gameswf_types.h ../gameswf/gameswf.h ../base/tu_types.h
+gameswf_types.o: ../base/tu_config.h ../compatibility_include.h
+gameswf_types.o: ../base/dlmalloc.h gameswf_log.h gameswf_stream.h
+gameswf_types.o: ../base/container.h ../base/utility.h ../base/tu_math.h
+gameswf_types.o: ../base/tu_swap.h gameswf_render.h gameswf.h ../base/image.h
+gameswf_xml.o: gameswf_log.h gameswf_action.h gameswf.h gameswf_types.h
+gameswf_xml.o: ../gameswf/gameswf.h ../base/tu_types.h ../base/tu_config.h
+gameswf_xml.o: ../compatibility_include.h ../base/dlmalloc.h
+gameswf_xml.o: ../base/container.h ../base/utility.h ../base/tu_math.h
+gameswf_xml.o: ../base/tu_swap.h gameswf_impl.h ../base/smart_ptr.h
+gameswf_xml.o: gameswf_string.h
+gameswf_xmlsocket.o: gameswf_log.h gameswf_xmlsocket.h gameswf_action.h
+gameswf_xmlsocket.o: gameswf.h gameswf_types.h ../gameswf/gameswf.h
+gameswf_xmlsocket.o: ../base/tu_types.h ../base/tu_config.h
+gameswf_xmlsocket.o: ../compatibility_include.h ../base/dlmalloc.h
+gameswf_xmlsocket.o: ../base/container.h ../base/utility.h ../base/tu_math.h
+gameswf_xmlsocket.o: ../base/tu_swap.h gameswf_impl.h ../base/smart_ptr.h
+gameswf_xmlsocket.o: gameswf_timers.h ../base/tu_timer.h

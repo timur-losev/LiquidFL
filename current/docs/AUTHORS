@@ -1,0 +1,31 @@
+-*- utf8 -*-
+
+Code
+====
+
+Thatcher Ulrich <tu@tulrich.com> -- maintainer, most of the code so far
+Mike Shaver -- fixes for Linux, morph shapes in gameswf
+Thierry Berger-Perrin -- fixes, fixes for Linux, Linux version of memory mapping wrapper, mp3 handling for gameswf player
+Ignacio Castaño -- fixes in chunklod, lots of code and fixes for gameswf
+Willem Kokke -- gameswf_parser, clip shapes, other misc gameswf code & test cases
+Vitaly Alexeev -- lots of things including video, various ActionScript classes, many bugfixes
+Alexander Streit -- faster image resampling code for gameswf
+Rob Savoye -- lots of XML work for ActionScript, plus misc gameswf
+Paul Kelly, Bob Ives -- gameswf_render_handler_d3d.cpp
+Thomas Vissieres -- fixes to gameswf line & shape rendering order
+Julien Hamaide -- flash.geom.Point and flash.geom.Matrix implementation, renderer optimization, JIT-compiler
+Steve Buchi -- tabbing text boxes, many bugfixes for textfield and movieclip
+
+Bug reports, small patches & testing
+====================================
+
+Julien Cayzac
+Aaron Pfeiffer
+Dave Moore
+Daniel Phillips
+Mark Hodson
+Zousar Shaker
+Kostas Pataridis
+Bryan Perfetto
+Adam Moss
+Francois Guibert

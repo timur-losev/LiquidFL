@@ -1,0 +1,103 @@
+NOTES FOR ARTISTS USING GAMESWF
+
+
+Fonts
+-----
+
+SWF can use any Windows TrueType font.  For best memory use, use of
+different fonts should be kept to a minimum.  For example, "Arial
+Black Bold" takes up around 170K in a SWF file, when it includes the
+95 Basic Latin characters.  Including more characters (such as
+accented characters or Asian characters) will take more memory.
+
+A bold or italic version of a font counts as a separate font, with
+respect to memory use.
+
+For Static Text, Flash automatically includes the glyph outlines in
+the exported SWF file.
+
+For Dynamic Text, you must make sure the outlines for the characters
+you use are included.  Do this by selecting any Dynamic Text field in
+your SWF, and in the Properties panel, press the "Character..."
+button.  In the dialog, select "Specify Ranges", and select "Basic
+Latin (95 glyphs)".  If you need accented or non-Roman glyphs, etc,
+you can select them here.
+
+If you use a special character, like the infinity sign or something
+like that, you can insert it into the dialog as well.
+
+Any glyph that is missing from the SWF file will be rendered by
+gameswf as an empty box.
+
+
+Watch Out For
+-------------
+
+Some known incompatibilities & shortcomings of gameswf:
+
+* ActionScript support is buggy and incomplete.  Among other things,
+  the built-in ActionScript widgets (i.e. CheckBox, ComboBox,
+  PushButton) probably won't work.
+
+* "shape tweening" (i.e. morphing one shape into another) may not be
+  very efficient.
+
+* line rendering is not correct; in particular lines that are thicker
+  than 1 pixel in Flash, are rendered as 1-pixel lines by gameswf.
+  Flash has an option to turn lines into shapes, which will solve this
+  problem on a case-by-case basis.
+
+* outline shapes are not antialiased
+
+* small text is antialiased; however it may look fuzzier than in the
+  Macromedia Flash player (this can be mitigated using MIPMAPLODBIAS
+  in the game engine's render handler; bother your friendly
+  neighborhood engine coder if the fuzziness is an issue).
+
+* very large text either gets very fuzzy, or becomes non-antialiased
+  (depending on how gameswf is configured).
+
+* bitmap fills are smoother in gameswf than in Macromedia,
+  i.e. they're bilinear filtered instead of point sampled.  Usually
+  this is desirable.  This can be configured differently by a coder if
+  necessary.
+
+* various small differences; in general these are bugs in gameswf so
+  you should tell a coder, and work around them if possible.
+
+
+Memory Use
+----------
+
+If you check "Generate size report" when exporting from Flash, you get
+a useful breakdown of the memory use of elements in your movie.
+gameswf does not use the SWF elements in their native form, so the
+memory use in this report is not exactly the same as what gameswf will
+require.  In general, gameswf requires more memory than what is
+reported here, but the exact relationship depends on the type and
+content of the element, as well as how gameswf has been configured and
+how your game engine works.
+
+The key things to look at in this report are:
+
+* bitmap use.  Bitmaps in SWF consume texture memory in gameswf.
+  
+  Non-power-of-two bitmaps are stretched to the next largest
+  power-of-two size, so for best memory use and rendering quality, you
+  should always use power-of-two bitmaps in your SWF.
+
+  One useful way to stretch your memory budget is to use the same
+  bitmapped element in different contexts, to provide variety, by
+  scaling & rotating it and combining with other elements.  This uses
+  very little additional memory.  You can also apply the same basic
+  bitmapped fill to different shapes, and use layers to achieve richer
+  effects.
+
+* fonts.  Fonts can use quite a bit of memory.  Each Bold and Italic
+  variation of a base font counts as a separate font.  However,
+  different sizes of the same font are completely free.
+
+* shapes.  Simple shape outlines are not an issue.  However, very
+  complex shape outlines can cause gameswf to consume a lot of memory.
+  Sometimes it is better to replace a complex shape outline with a
+  partly transparent bitmap.
