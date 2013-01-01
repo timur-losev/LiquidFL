@@ -40,7 +40,7 @@ namespace gameswf
 
 		//Vitaly: I'm not sure that this code works on all versions of Windows
 
-		tu_stringi fontname = font_name;
+		lfl_stringi fontname = font_name;
 		if (is_bold)
 		{
 			fontname += " Bold";

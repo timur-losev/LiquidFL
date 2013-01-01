@@ -26,8 +26,8 @@ namespace gameswf
 
 		as_color_transform(player* player);
 
-		exported_module virtual bool	set_member(const tu_stringi& name, const as_value& val);
-		exported_module virtual bool	get_member(const tu_stringi& name, as_value* val);
+		exported_module virtual bool	set_member(const lfl_stringi& name, const as_value& val);
+		exported_module virtual bool	get_member(const lfl_stringi& name, as_value* val);
 		
 		cxform m_color_transform;
 	};

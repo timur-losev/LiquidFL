@@ -21,7 +21,7 @@ namespace gameswf
 	};
 
 	static stringi_hash<as_transform_member>	s_transform_member_map;
-	static as_transform_member   get_transform_member(const tu_stringi& name);
+	static as_transform_member   get_transform_member(const lfl_stringi& name);
 
 	// Transform( mc:MovieClip )
 	void	as_global_transform_ctor(const function_call& fn)
@@ -43,7 +43,7 @@ namespace gameswf
 	{
 	}
 
-	bool	as_transform::set_member(const tu_stringi& name, const as_value& val)
+	bool	as_transform::set_member(const lfl_stringi& name, const as_value& val)
 	{
 		as_transform_member	member = get_transform_member( name );
 
@@ -82,7 +82,7 @@ namespace gameswf
 		return as_object::set_member( name, val );
 	}
 
-	bool	as_transform::get_member(const tu_stringi& name, as_value* val)
+	bool	as_transform::get_member(const lfl_stringi& name, as_value* val)
 	{
 		as_transform_member	member = get_transform_member( name );
 
@@ -120,7 +120,7 @@ namespace gameswf
 		return as_object::get_member( name, val );
 	}
 
-	as_transform_member	get_transform_member(const tu_stringi& name)
+	as_transform_member	get_transform_member(const lfl_stringi& name)
 	{
 		if (s_transform_member_map.size() == 0)
 		{

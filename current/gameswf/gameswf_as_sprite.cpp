@@ -143,7 +143,7 @@ namespace gameswf
 		// gotoAndPlay(NaN) will be ignored
 		if (fn.arg(0).is_string() || fn.arg(0).is_number() || fn.arg(0).is_property())
 		{
-			sprite->goto_frame(fn.arg(0).to_tu_string());
+			sprite->goto_frame(fn.arg(0).to_lfl_string());
 			sprite->set_play_state(character::PLAY);
 		}
 	}
@@ -160,7 +160,7 @@ namespace gameswf
 		// gotoAndStop(NaN) will be ignored
 		if (fn.arg(0).is_string() || fn.arg(0).is_number() || fn.arg(0).is_property())
 		{
-			sprite->goto_frame(fn.arg(0).to_tu_string());
+			sprite->goto_frame(fn.arg(0).to_lfl_string());
 			sprite->set_play_state(character::STOP);
 		}
 	}
@@ -274,7 +274,7 @@ namespace gameswf
 		if (fn.nargs >= 2) 
 		{ 
 			character* ch = sprite->clone_display_object(
-				fn.arg(0).to_tu_string(), 
+				fn.arg(0).to_lfl_string(), 
 				fn.arg(1).to_int() + ADJUST_DEPTH_VALUE);
 
 			if (fn.nargs == 3) 

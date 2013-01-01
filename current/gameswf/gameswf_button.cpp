@@ -502,7 +502,7 @@ namespace gameswf
 		// ActionScript overrides
 		//
 
-		virtual bool	set_member(const tu_stringi& name, const as_value& val)
+		virtual bool	set_member(const lfl_stringi& name, const as_value& val)
 		{
 			as_standard_member	std_member = get_standard_member(name);
 			switch (std_member)
@@ -521,7 +521,7 @@ namespace gameswf
 			return character::set_member(name, val);
 		}
 
-		virtual bool	get_member(const tu_stringi& name, as_value* val)
+		virtual bool	get_member(const lfl_stringi& name, as_value* val)
 		{
 			// first try character members
 			as_standard_member	std_member = get_standard_member(name);

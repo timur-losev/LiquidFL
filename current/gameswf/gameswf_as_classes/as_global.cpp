@@ -57,7 +57,7 @@ namespace gameswf
 			{
 				as_value func;
 				as_object* this_ptr = fn.arg(0).to_object();
-				this_ptr->get_member(fn.arg(1).to_tu_string(), &func);
+				this_ptr->get_member(fn.arg(1).to_lfl_string(), &func);
 
 				t->m_func = func.to_function();
 				t->m_interval = fn.arg(2).to_float() / 1000.0f;
@@ -180,7 +180,7 @@ namespace gameswf
 				const as_value& key = it->second;
 				if (key.is_string())
 				{
-					stringi_hash<as_value>::iterator obj_it = obj->m_members.find(key.to_tu_string());
+					stringi_hash<as_value>::iterator obj_it = obj->m_members.find(key.to_lfl_string());
 					if (obj_it != obj->m_members.end())
 					{
 						const as_value& val = obj_it->second;

@@ -12,7 +12,7 @@ namespace gameswf
 	{
 		as_sharedobject* object = cast_to<as_sharedobject>(fn.this_ptr);
 
-		*fn.result = as_sharedobject::get_local( fn.arg( 0 ).to_tu_string(), object->get_player() ).get_ptr();
+		*fn.result = as_sharedobject::get_local( fn.arg( 0 ).to_lfl_string(), object->get_player() ).get_ptr();
 	}
 
 	void	as_sharedobject_flush(const function_call& fn)
@@ -41,7 +41,7 @@ namespace gameswf
 		return it->second;
 	}
 
-	bool	as_sharedobject::get_member(const tu_stringi& name, as_value* val)
+	bool	as_sharedobject::get_member(const lfl_stringi& name, as_value* val)
 	{
 		if( as_object::get_member( name, val ) )
 		{

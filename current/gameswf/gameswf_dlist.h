@@ -99,7 +99,7 @@ namespace gameswf
 
 		// May return NULL.
 		// If there are multiples, returns the *first* match only!
-		character*	get_character_by_name_i(const tu_stringi& name);
+		character*	get_character_by_name_i(const lfl_stringi& name);
 
 		inline const display_object_info&	get_display_object(int idx) const
 		// get the display object at the given position.

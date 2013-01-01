@@ -103,7 +103,7 @@ namespace gameswf
 	{
 	}
 
-	bool	as_listener::get_member(const tu_stringi& name, as_value* val)
+	bool	as_listener::get_member(const lfl_stringi& name, as_value* val)
 	{
 		if (name == "length")
 		{
@@ -158,7 +158,7 @@ namespace gameswf
 
 		// event handler may affects 'fn.arg' using broadcastMessage
 		// so we iterate through the copy of args
-		lfl_string event_name = fn.arg(0).to_tu_string();
+		lfl_string event_name = fn.arg(0).to_lfl_string();
 		for (int j = fn.nargs - 1; j > 0; j--)
 		{
 			fn.env->push(fn.arg(j));
@@ -175,7 +175,7 @@ namespace gameswf
 			// event handler may affects m_suspended_event using broadcastMessage
 			// so we iterate through the copy of args
 			array<as_value>& arg = m_suspended_event.front();
-			lfl_string event_name = arg[0].to_tu_string();
+			lfl_string event_name = arg[0].to_lfl_string();
 			for (int j = arg.size() - 1; j > 0; j--)
 			{
 				fn.env->push(arg[j]);

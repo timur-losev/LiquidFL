@@ -1411,7 +1411,7 @@ private:
 
 #endif // not _TU_USE_STL
 
-class tu_stringi;
+class lfl_stringi;
 
 // String-like type.  Attempt to be memory-efficient with small strings.
 class lfl_string
@@ -1510,9 +1510,9 @@ public:
         return (const char*) (*this);
     }
 
-    // If you need a const tu_stringi, don't create a new object;
+    // If you need a const lfl_stringi, don't create a new object;
     // these things have the same internal representation.
-    exported_module const tu_stringi&	to_tu_stringi() const { return *(tu_stringi*) this; }
+    exported_module const lfl_stringi&	to_tu_stringi() const { return *(lfl_stringi*) this; }
 
     // operator= returns void; if you want to know why, ask Charles Bloom :)
     // (executive summary: a = b = c is an invitation to bad code)
@@ -1809,29 +1809,29 @@ private:
 
 // String-like type; comparisons are CASE INSENSITIVE.
 // Uses lfl_string for implementation.
-class tu_stringi
+class lfl_stringi
 {
 public:
-    tu_stringi() {}
-    tu_stringi(const char* str) : m_string(str) {}
-    tu_stringi(const lfl_string& str) : m_string(str) {}
-    tu_stringi(const tu_stringi& stri) : m_string(stri.c_str()) {}
+    lfl_stringi() {}
+    lfl_stringi(const char* str) : m_string(str) {}
+    lfl_stringi(const lfl_string& str) : m_string(str) {}
+    lfl_stringi(const lfl_stringi& stri) : m_string(stri.c_str()) {}
 
-    ~tu_stringi() {}
+    ~lfl_stringi() {}
 
     operator const char*() const { return (const char*) m_string; }
     const char*	c_str() const { return m_string.c_str(); }
     void	operator=(const char* str) { m_string = str; }
     void	operator=(const lfl_string& str) { m_string = str; }
-    void	operator=(const tu_stringi& str) { m_string = str.m_string; }
+    void	operator=(const lfl_stringi& str) { m_string = str.m_string; }
     int	length() const { return m_string.length(); }
     int	size() const { return length(); }
     char&	operator[](int index) { return m_string[index]; }
     const char&	operator[](int index) const { return m_string[index]; }
     void	operator+=(const char* str) { m_string += str; }
     void	operator+=(const lfl_string& str) { m_string += str; }
-    void	operator+=(const tu_stringi& str) { m_string += str.m_string; }
-    tu_stringi	operator+(const char* str) const { return tu_stringi(m_string + str); }
+    void	operator+=(const lfl_stringi& str) { m_string += str.m_string; }
+    lfl_stringi	operator+(const char* str) const { return lfl_stringi(m_string + str); }
 
     // The special stuff.
     lfl_string& to_tu_string() { return m_string; }
@@ -1841,7 +1841,7 @@ public:
     {
         return lfl_string::stricmp(*this, str) == 0;
     }
-    bool	operator==(const tu_stringi& str) const
+    bool	operator==(const lfl_stringi& str) const
     {
         return lfl_string::stricmp(*this, str) == 0;
     }
@@ -1849,7 +1849,7 @@ public:
     {
         return lfl_string::stricmp(c_str(), str) < 0;
     }
-    bool	operator<(const tu_stringi& str) const
+    bool	operator<(const lfl_stringi& str) const
     {
         return *this < str.c_str();
     }
@@ -1857,7 +1857,7 @@ public:
     {
         return lfl_string::stricmp(c_str(), str) > 0;
     }
-    bool	operator>(const tu_stringi& str) const
+    bool	operator>(const lfl_stringi& str) const
     {
         return *this > str.c_str();
     }
@@ -1907,7 +1907,7 @@ public:
 
 // Case-insensitive string hash.
 template<class U>
-class stringi_hash : public hash<tu_stringi, U, stringi_hash_functor<tu_stringi> >
+class stringi_hash : public hash<lfl_stringi, U, stringi_hash_functor<lfl_stringi> >
 {
 };
 

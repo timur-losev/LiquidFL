@@ -30,7 +30,7 @@ namespace gameswf
 		}
 
 		as_listener(player* player);
-		virtual bool	get_member(const tu_stringi& name, as_value* val);
+		virtual bool	get_member(const lfl_stringi& name, as_value* val);
 		void add(as_object* listener);
 		void remove(as_object* listener);
 		int size() const;

@@ -113,7 +113,7 @@ namespace gameswf
 		return is_removed;
 	} 
 
-	as_object*	listener::operator[](const tu_stringi& name) const
+	as_object*	listener::operator[](const lfl_stringi& name) const
 	{
 		return operator[](atoi(name.c_str()));
 	}

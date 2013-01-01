@@ -26,7 +26,7 @@ namespace gameswf
 			m_class = info;
 		}
 
-		exported_module virtual bool	find_property( const tu_stringi & name, as_value * val );
+		exported_module virtual bool	find_property( const lfl_stringi & name, as_value * val );
 
 	private:
 

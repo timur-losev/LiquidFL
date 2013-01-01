@@ -271,7 +271,7 @@ namespace gameswf
 	};
 	// Return the standard enum, if the arg names a standard member.
 	// Returns M_INVALID_MEMBER if there's no match.
-	as_standard_member	get_standard_member(const tu_stringi& name);
+	as_standard_member	get_standard_member(const lfl_stringi& name);
 
 	enum builtin_object
 	{
@@ -285,7 +285,7 @@ namespace gameswf
 		BUILTIN_COUNT
 	};
 
-	bool get_builtin(builtin_object id, const tu_stringi& name, as_value* val);
+	bool get_builtin(builtin_object id, const lfl_stringi& name, as_value* val);
 	stringi_hash<as_value>* new_standard_method_map(builtin_object id);
 
 }	// end namespace gameswf

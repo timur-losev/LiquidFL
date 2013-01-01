@@ -166,8 +166,8 @@ namespace gameswf
 		exported_module as_environment(player* player);
 		exported_module ~as_environment();
 
-		bool	set_member(const tu_stringi& name, const as_value& val);
-		bool	get_member(const tu_stringi& name, as_value* val);
+		bool	set_member(const lfl_stringi& name, const as_value& val);
+		bool	get_member(const lfl_stringi& name, as_value* val);
 
 		int get_stack_size() const { return size(); }
 		void set_stack_size(int n) { resize(n); }

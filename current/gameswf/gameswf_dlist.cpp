@@ -161,7 +161,7 @@ namespace gameswf
 		return -1;
 	}
 
-	character*	display_list::get_character_by_name_i(const tu_stringi& name)
+	character*	display_list::get_character_by_name_i(const lfl_stringi& name)
 	// Return first character with matching (case insensitive) name, if any.
 	{
 		// Search through dlist for a match.

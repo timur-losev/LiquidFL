@@ -559,8 +559,8 @@ namespace gameswf
 
 		virtual bool can_handle_mouse_event() { return false; }
 	
-		virtual bool	get_member(const tu_stringi& name, as_value* val);
-		virtual bool	set_member(const tu_stringi& name, const as_value& val);
+		virtual bool	get_member(const lfl_stringi& name, as_value* val);
+		virtual bool	set_member(const lfl_stringi& name, const as_value& val);
 
 		// Movie info
 		virtual int	get_movie_version() { return 0; }

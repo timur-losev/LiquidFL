@@ -114,7 +114,7 @@ namespace gameswf
 	{
 		if (m_ns)
 		{
-			m_ns->write_string(val.to_tu_string(), XML_TIMEOUT);
+			m_ns->write_string(val.to_lfl_string(), XML_TIMEOUT);
 		}
 	}
 

@@ -102,8 +102,8 @@ namespace gameswf
 		exported_module const char*	to_xstring() const;
 
 		exported_module const char*	to_string() const;
-		exported_module const lfl_string&	to_tu_string() const;
-		exported_module const tu_stringi&	to_tu_stringi() const;
+		exported_module const lfl_string&	to_lfl_string() const;
+		exported_module const lfl_stringi&	to_lfl_stringi() const;
 		exported_module double	to_number() const;
 		exported_module int	to_int() const { return (int) to_number(); };
 		exported_module float	to_float() const { return (float) to_number(); };

@@ -28,7 +28,7 @@ namespace gameswf
 		// assert((parent == NULL && m_id == -1)	|| (parent != NULL && m_id >= 0));
 	}
 
-	bool	character::get_member(const tu_stringi& name, as_value* val)
+	bool	character::get_member(const lfl_stringi& name, as_value* val)
 	// Set *val to the value of the named member and
 	// return true, if we have the named member.
 	// Otherwise leave *val alone and return false.
@@ -126,7 +126,7 @@ namespace gameswf
 				parent->get_member("_target", &target);
 
 					// if s != "/"(root) add "/"
-				lfl_string s = target.to_tu_string();
+				lfl_string s = target.to_lfl_string();
 				s += s == "/" ? "" : "/";
 
 				// add own name
@@ -222,7 +222,7 @@ namespace gameswf
 	}
 
 	// TODO: call_watcher
-	bool	character::set_member(const tu_stringi& name, const as_value& val)
+	bool	character::set_member(const lfl_stringi& name, const as_value& val)
 	{
 		// first try character members
 		as_standard_member	std_member = get_standard_member(name);
@@ -349,7 +349,7 @@ namespace gameswf
 			}
 			case M_NAME:
 			{
-				set_name(val.to_tu_string());
+				set_name(val.to_lfl_string());
 				return true;
 			}
 			case M_HIGHQUALITY:

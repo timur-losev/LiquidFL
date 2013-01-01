@@ -42,7 +42,7 @@ namespace gameswf
 		exported_module void advance(float delta_time);
 
 		exported_module void clear() { m_listeners.clear(); }
-		exported_module as_object*	operator[](const tu_stringi& name) const;
+		exported_module as_object*	operator[](const lfl_stringi& name) const;
 		exported_module as_object*	operator[](int index) const;
 		exported_module int	size() const;
 		exported_module void enumerate(as_environment* env) const;

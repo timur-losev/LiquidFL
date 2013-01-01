@@ -40,7 +40,7 @@ namespace gameswf
 			assert( loadvars );
 
 			if( fn.arg(0).is_string() && fn.arg(1).is_string() )
-				loadvars->add_header( fn.arg(0).to_tu_string(), fn.arg(1).to_tu_string() );
+				loadvars->add_header( fn.arg(0).to_lfl_string(), fn.arg(1).to_lfl_string() );
 		}
 	}
 
@@ -56,7 +56,7 @@ namespace gameswf
 
 		assert( loadvars );
 
-		loadvars->decode(fn.arg(0).to_tu_string());
+		loadvars->decode(fn.arg(0).to_lfl_string());
 	}
 
 	//getBytesLoaded() : Number
@@ -365,7 +365,7 @@ namespace gameswf
 		}
 	}
 
-	bool	as_loadvars::set_member(const tu_stringi& name, const as_value& val)
+	bool	as_loadvars::set_member(const lfl_stringi& name, const as_value& val)
 	{
 		// todo: check for callbacks
 
@@ -377,12 +377,12 @@ namespace gameswf
 			return as_object::set_member( name, val );
 		}
 
-		m_values.set( name.to_tu_string(), val.to_tu_string() );
+		m_values.set( name.to_tu_string(), val.to_lfl_string() );
 
 		return true;
 	}
 
-	bool	as_loadvars::get_member(const tu_stringi& name, as_value* val)
+	bool	as_loadvars::get_member(const lfl_stringi& name, as_value* val)
 	{
 		string_hash<lfl_string>::iterator it = m_values.find( name.to_tu_string() );
 		if( it != m_values.end() )

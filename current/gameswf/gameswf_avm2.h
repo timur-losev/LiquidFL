@@ -84,7 +84,7 @@ namespace gameswf
 		void	read(lfl_stream* in, abc_def* abc);
 	};
 
-	struct except_info : public ref_counted
+	struct as3_exception_info : public ref_counted
 	{
 		int m_from;
 		int m_to;
@@ -140,7 +140,7 @@ namespace gameswf
 		int m_init_scope_depth;
 		int m_max_scope_depth;
 		membuf m_code;
-		array<gc_ptr<except_info> > m_exception;
+		array<gc_ptr<as3_exception_info> > m_exception;
 		array<gc_ptr<traits_info> > m_trait;
 		jit_function m_compiled_code;
 

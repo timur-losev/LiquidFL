@@ -119,7 +119,7 @@ namespace gameswf
 	}
 
 	//TODO: we should use a switch() instead of string compares.
-	bool	as_point::set_member(const tu_stringi& name, const as_value& val)
+	bool	as_point::set_member(const lfl_stringi& name, const as_value& val)
 	{
 		if( name == "x" )
 		{
@@ -135,7 +135,7 @@ namespace gameswf
 		return as_object::set_member( name, val );
 	}
 
-	bool	as_point::get_member(const tu_stringi& name, as_value* val)
+	bool	as_point::get_member(const lfl_stringi& name, as_value* val)
 	{
 		if( name == "x" )
 		{

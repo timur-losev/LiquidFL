@@ -234,7 +234,7 @@ namespace gameswf
 
 		// Return pointer to static string for return value.
 		static lfl_string	s_retval;
-		s_retval = result.to_tu_string();
+		s_retval = result.to_lfl_string();
 		return s_retval.c_str();
 	}
 	
@@ -264,7 +264,7 @@ namespace gameswf
 		as_value	result = call_method(method, env, this_ptr, nargs, env->get_top_index());
 		env->drop(nargs);
 
-		return result.to_tu_string();
+		return result.to_lfl_string();
 	}
 
 	//
@@ -727,20 +727,20 @@ namespace gameswf
 
 					case ACTION_StringEqual:	// string equal
 					{
-						env->top(1).set_bool(env->top(1).to_tu_string() == env->top(0).to_tu_string());
+						env->top(1).set_bool(env->top(1).to_lfl_string() == env->top(0).to_lfl_string());
 						env->drop(1);
 					} break;
 
 					case ACTION_StringLength:	// string length
 					{
-						env->top(0).set_int(env->top(0).to_tu_string().utf8_length());
+						env->top(0).set_int(env->top(0).to_lfl_string().utf8_length());
 					} break;
 
 					case ACTION_SubString:	// substring
 					{
 						int	size = env->top(0).to_int();
 						int	base = env->top(1).to_int() - 1;  // 1-based indices
-						const lfl_string&	str = env->top(2).to_tu_string();
+						const lfl_string&	str = env->top(2).to_lfl_string();
 
 						// Keep base within range.
 						base = iclamp(base, 0, str.length());
@@ -770,7 +770,7 @@ namespace gameswf
 
 					case ACTION_GetVariable:	// get variable
 					{
-						const lfl_string var_string = env->top(0).to_tu_string();
+						const lfl_string var_string = env->top(0).to_lfl_string();
 						
 						// keep the latest var name(to log it if call_method failure)
 						last_varname = var_string;
@@ -782,20 +782,20 @@ namespace gameswf
 						{
 							IF_VERBOSE_ACTION(log_msg("-------------- get var: %s=%s\n",
 										  var_string.c_str(),
-										  variable.to_tu_string().c_str()));
+										  variable.to_lfl_string().c_str()));
 						}
 						else
 						{
 							IF_VERBOSE_ACTION(log_msg("-------------- get var: %s=%s at %p\n",
 										  var_string.c_str(),
-										  variable.to_tu_string().c_str(), variable.to_object()));
+										  variable.to_lfl_string().c_str(), variable.to_object()));
 						}
 					} break;
 
 					case ACTION_SetVariable:	// set variable
 					{
-						env->set_variable(env->top(1).to_tu_string(), env->top(0), with_stack);
-						IF_VERBOSE_ACTION(log_msg("-------------- set var: %s \n", env->top(1).to_tu_string().c_str()));
+						env->set_variable(env->top(1).to_lfl_string(), env->top(0), with_stack);
+						IF_VERBOSE_ACTION(log_msg("-------------- set var: %s \n", env->top(1).to_lfl_string().c_str()));
 
 						env->drop(2);
 					} break;
@@ -811,8 +811,8 @@ namespace gameswf
 
 					case ACTION_StringConcat:	// string concat
 					{
-						lfl_string str = env->top(1).to_tu_string();
-						str += env->top(0).to_tu_string();
+						lfl_string str = env->top(1).to_lfl_string();
+						str += env->top(0).to_lfl_string();
 						env->drop(1);
 						env->top(0).set_tu_string(str);
 					} break;
@@ -855,7 +855,7 @@ namespace gameswf
 						{
 							// Flash automatically adds 16384 to depth therefore
 							// we don't apply ADJUST_DEPTH_VALUE
-							target->clone_display_object(env->top(1).to_tu_string(), env->top(0).to_int());
+							target->clone_display_object(env->top(1).to_lfl_string(), env->top(0).to_int());
 						}
 
 						env->drop(3);
@@ -931,7 +931,7 @@ namespace gameswf
 
 					case ACTION_StringLessThan:	// string less than
 					{
-						env->top(1).set_bool(env->top(1).to_tu_string() < env->top(0).to_tu_string());
+						env->top(1).set_bool(env->top(1).to_lfl_string() < env->top(0).to_lfl_string());
 					} break;
 
 					case ACTION_Throw:	// throw
@@ -1026,7 +1026,7 @@ namespace gameswf
 
 					case ACTION_Delete:	// delete
 					{
-						const lfl_string varname = env->top(0).to_tu_string();
+						const lfl_string varname = env->top(0).to_lfl_string();
 						as_object* obj_interface = env->top(1).to_object();
 						env->drop(1);
 
@@ -1046,7 +1046,7 @@ namespace gameswf
 
 					case ACTION_Delete2:	// delete2
 					{
-						lfl_string varname(env->top(0).to_tu_string());
+						lfl_string varname(env->top(0).to_lfl_string());
 						as_value obj(env->get_variable_raw(varname, with_stack));
 
 						if (obj.is_undefined() == false)
@@ -1084,7 +1084,7 @@ namespace gameswf
 
 					case ACTION_SetLocal:	// set local
 					{
-						env->set_local(env->top(1).to_tu_string(), env->top(0));
+						env->set_local(env->top(1).to_lfl_string(), env->top(0));
 						env->drop(2);
 					} break;
 
@@ -1094,7 +1094,7 @@ namespace gameswf
 						if (env->top(0).is_string())
 						{
 							// Function is a string; lookup the function.
-							const lfl_string&	function_name = env->top(0).to_tu_string();
+							const lfl_string&	function_name = env->top(0).to_lfl_string();
 							function = env->get_variable(function_name, with_stack);
 
 							// super constructor, Flash 6 
@@ -1149,9 +1149,9 @@ namespace gameswf
 					case ACTION_New:	// new
 					{
 						as_value	classname = env->pop();
-						IF_VERBOSE_ACTION(log_msg("-------------- new object: %s\n", classname.to_tu_string().c_str()));
+						IF_VERBOSE_ACTION(log_msg("-------------- new object: %s\n", classname.to_lfl_string().c_str()));
 						int	nargs = env->pop().to_int();
-						as_value constructor = env->get_variable(classname.to_tu_string(), with_stack);
+						as_value constructor = env->get_variable(classname.to_lfl_string(), with_stack);
 						as_value new_obj;
 
 						if (as_c_function* c_constructor = cast_to<as_c_function>(constructor.to_object()))
@@ -1185,11 +1185,11 @@ namespace gameswf
 								params.push_back(env->bottom(first_arg_bottom_index - i));
 
 
-							as_object* plugin = load_as_plugin(env->get_player(), classname.to_tu_string(), params);
+							as_object* plugin = load_as_plugin(env->get_player(), classname.to_lfl_string(), params);
 							if (plugin)
 								new_obj.set_as_object(plugin);
 							else
-								log_error("can't create object with unknown class '%s'\n", classname.to_tu_string().c_str());
+								log_error("can't create object with unknown class '%s'\n", classname.to_lfl_string().c_str());
 						}
 
 						// places new object to heap
@@ -1202,7 +1202,7 @@ namespace gameswf
 
 					case ACTION_DeclareLocal:	// declare local
 					{
-						const lfl_string&	varname = env->top(0).to_tu_string();
+						const lfl_string&	varname = env->top(0).to_lfl_string();
 						env->declare_local(varname);
 						env->drop(1);
 					} break;
@@ -1233,8 +1233,8 @@ namespace gameswf
 						for (int i = 0; i < n; i++)
 						{
 							// a new item must be ENUM
-	//						obj->builtin_member(env->top(1).to_tu_string(), env->top(0));
-							obj->set_member(env->top(1).to_tu_string(), env->top(0));
+	//						obj->builtin_member(env->top(1).to_lfl_string(), env->top(0));
+							obj->set_member(env->top(1).to_lfl_string(), env->top(0));
 
 							env->drop(2);
 						}
@@ -1255,7 +1255,7 @@ namespace gameswf
 
 					case ACTION_Enumerate:	// enumerate
 					{
-						as_value variable = env->get_variable(env->top(0).to_tu_string(), with_stack);
+						as_value variable = env->get_variable(env->top(0).to_lfl_string(), with_stack);
 						enumerate(env, variable.to_object());
 						env->drop(1);
 					} break;
@@ -1277,7 +1277,7 @@ namespace gameswf
 					case ACTION_LessThan_Typed:	// less than (typed)
 					{
 						if (env->top(1).is_string())
-							env->top(1).set_bool(env->top(1).to_tu_string() < env->top(0).to_tu_string());
+							env->top(1).set_bool(env->top(1).to_lfl_string() < env->top(0).to_lfl_string());
 						else
 							env->top(1).set_bool(env->top(1) < env->top(0).to_number());
 
@@ -1299,7 +1299,7 @@ namespace gameswf
 
 					case ACTION_ToString:	// to string
 					{
-						const lfl_string& str = env->top(0).to_tu_string();
+						const lfl_string& str = env->top(0).to_lfl_string();
 						env->top(0).set_tu_string(str);
 					} break;
 
@@ -1326,7 +1326,7 @@ namespace gameswf
 						{
 							// try property/method of a primitive type, like String.length
 							as_value val;
-							env->top(1).find_property(env->top(0).to_tu_string(), &val);
+							env->top(1).find_property(env->top(0).to_lfl_string(), &val);
 							if (val.is_property())
 							{
 								val.get_property(env->top(1), &val);
@@ -1336,10 +1336,10 @@ namespace gameswf
 						else
 						{
 							// keep the latest var name(to log it if call_method failure)
-							last_varname = env->top(0).to_tu_string();
+							last_varname = env->top(0).to_lfl_string();
 
 							env->top(1).set_undefined();
-							if (obj->get_member(env->top(0).to_tu_string(), &(env->top(1))) == false)
+							if (obj->get_member(env->top(0).to_lfl_string(), &(env->top(1))) == false)
 							{
 								// try '__resolve' property
 								as_value val;
@@ -1359,14 +1359,14 @@ namespace gameswf
 								if (env->top(1).to_object() == NULL)
 								{
 									log_msg("-------------- get_member %s=%s\n",
-												env->top(0).to_tu_string().c_str(),
-												env->top(1).to_tu_string().c_str());
+												env->top(0).to_lfl_string().c_str(),
+												env->top(1).to_lfl_string().c_str());
 								}
 								else
 								{
 									log_msg("-------------- get_member %s=%s at %p\n",
-												env->top(0).to_tu_string().c_str(),
-												env->top(1).to_tu_string().c_str(), env->top(1).to_object());
+												env->top(0).to_lfl_string().c_str(),
+												env->top(1).to_lfl_string().c_str(), env->top(1).to_object());
 							});
 						}
 						env->drop(1);
@@ -1378,22 +1378,22 @@ namespace gameswf
 						as_object*	obj = env->top(2).to_object();
 						if (obj)
 						{
-							obj->set_member(env->top(1).to_tu_string(), env->top(0));
+							obj->set_member(env->top(1).to_lfl_string(), env->top(0));
 							IF_VERBOSE_ACTION(
 								log_msg("-------------- set_member [%p].%s=%s\n",
-	//								env->top(2).to_tu_string().c_str(),
+	//								env->top(2).to_lfl_string().c_str(),
 									obj,
-									env->top(1).to_tu_string().c_str(),
-									env->top(0).to_tu_string().c_str()));
+									env->top(1).to_lfl_string().c_str(),
+									env->top(0).to_lfl_string().c_str()));
 						}
 						else
 						{
 							// Invalid object, can't set.
 							IF_VERBOSE_ACTION(
 								log_msg("-------------- set_member %s.%s=%s on invalid object!\n",
-									env->top(2).to_tu_string().c_str(),
-									env->top(1).to_tu_string().c_str(),
-									env->top(0).to_tu_string().c_str()));
+									env->top(2).to_lfl_string().c_str(),
+									env->top(1).to_lfl_string().c_str(),
+									env->top(0).to_lfl_string().c_str()));
 						}
 						env->drop(3);
 					} break;
@@ -1415,7 +1415,7 @@ namespace gameswf
 						CHECK_STACK(3);
 						int	nargs = env->top(2).to_int();
 						as_value	result;
-						const lfl_string&	method_name = env->top(0).to_tu_string();
+						const lfl_string&	method_name = env->top(0).to_lfl_string();
 
 						as_value func;
 						if (env->top(1).find_property(method_name, &func))
@@ -1646,7 +1646,7 @@ namespace gameswf
 					{
 						CHECK_STACK(2);
 						if (env->top(1).is_string())
-							env->top(1).set_bool(env->top(1).to_tu_string() > env->top(0).to_tu_string());
+							env->top(1).set_bool(env->top(1).to_lfl_string() > env->top(0).to_lfl_string());
 						else
 							env->top(1).set_bool(env->top(1).to_number() > env->top(0).to_number());
 
@@ -1656,7 +1656,7 @@ namespace gameswf
 					case ACTION_StringGreaterThan:	// string gt
 					{
 						CHECK_STACK(2);
-						env->top(1).set_bool(env->top(1).to_tu_string() > env->top(0).to_tu_string());
+						env->top(1).set_bool(env->top(1).to_lfl_string() > env->top(0).to_lfl_string());
 						env->drop(1);
 					} break;
 

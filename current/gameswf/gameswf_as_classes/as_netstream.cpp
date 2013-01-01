@@ -687,7 +687,7 @@ namespace gameswf
 			return;
 		}
 
-		ns->play(fn.arg(0).to_tu_string());
+		ns->play(fn.arg(0).to_lfl_string());
 	}
 
 	// Seeks the keyframe closest to the specified number of seconds from the beginning

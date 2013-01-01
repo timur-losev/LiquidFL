@@ -40,7 +40,7 @@ namespace gameswf
 		fn.result->set_bool(false);
 		if (fn.nargs == 2 && fn.env->get_target() != NULL)
 		{
-			character_def* def = fn.env->get_target()->find_exported_resource(fn.arg(0).to_tu_string());
+			character_def* def = fn.env->get_target()->find_exported_resource(fn.arg(0).to_lfl_string());
 			if (def)
 			{
 				as_function* func = cast_to<as_function>(fn.arg(1).to_object());
@@ -70,7 +70,7 @@ namespace gameswf
 				if (func)
 				{
 					IF_VERBOSE_ACTION(log_msg("registerClass '%s' (new)\n",	fn.arg(0).to_string()));
-					movie->export_resource(fn.arg(0).to_tu_string(), def);
+					movie->export_resource(fn.arg(0).to_lfl_string(), def);
 					fn.result->set_bool(true);
 					def->set_registered_class_constructor(func);
 				}
@@ -90,7 +90,7 @@ namespace gameswf
 		{
 			assert(fn.this_ptr);
 			as_value m;
-			if (fn.this_ptr->m_members.get(fn.arg(0).to_tu_stringi(), &m))
+			if (fn.this_ptr->m_members.get(fn.arg(0).to_lfl_stringi(), &m))
 			{
 				fn.result->set_bool(true);
 				return;
@@ -111,7 +111,7 @@ namespace gameswf
 		{
 			assert(fn.this_ptr);
 
-			ret = fn.this_ptr->watch(fn.arg(0).to_tu_string(),
+			ret = fn.this_ptr->watch(fn.arg(0).to_lfl_string(),
 							fn.arg(1).to_function(), fn.nargs > 2 ? fn.arg(2) : as_value());
 		}
 		fn.result->set_bool(ret);
@@ -127,7 +127,7 @@ namespace gameswf
 		if (fn.nargs == 1)
 		{
 			assert(fn.this_ptr);
-			ret = fn.this_ptr->unwatch(fn.arg(0).to_tu_string());
+			ret = fn.this_ptr->unwatch(fn.arg(0).to_lfl_string());
 		}
 		fn.result->set_bool(ret);
 	}
@@ -190,13 +190,13 @@ namespace gameswf
 	}
 
 	// called from a object constructor only
-	void	as_object::builtin_member(const tu_stringi& name, const as_value& val)
+	void	as_object::builtin_member(const lfl_stringi& name, const as_value& val)
 	{
 		val.set_flags(as_value::DONT_ENUM);
 		m_members.set(name, val);
 	}
 
-	void as_object::call_watcher(const tu_stringi& name, const as_value& old_val, as_value* new_val)
+	void as_object::call_watcher(const lfl_stringi& name, const as_value& old_val, as_value* new_val)
 	{
 		if (m_watch)
 		{
@@ -215,7 +215,7 @@ namespace gameswf
 		}
 	}
 
-	bool	as_object::set_member(const tu_stringi& name, const as_value& new_val)
+	bool	as_object::set_member(const lfl_stringi& name, const as_value& new_val)
 	{
 //		printf("SET MEMBER: %s at %p for object %p\n", name.c_str(), val.to_object(), this);
 		as_value val(new_val);
@@ -255,7 +255,7 @@ namespace gameswf
 		return m_proto.get_ptr();
 	}
 
-	bool	as_object::get_member(const tu_stringi& name, as_value* val)
+	bool	as_object::get_member(const lfl_stringi& name, as_value* val)
 	{
 		//printf("GET MEMBER: %s at %p for object %p\n", name.c_str(), val, this);
 		
@@ -287,7 +287,7 @@ namespace gameswf
 		return true;
 	}
 
-	bool	as_object::find_property( const tu_stringi & name, as_value * val )
+	bool	as_object::find_property( const lfl_stringi & name, as_value * val )
 	{
 		as_value dummy;
 		if( get_member(name, &dummy) )
@@ -368,7 +368,7 @@ namespace gameswf
 		// Check for member function.
 		bool called = false;
 		{
-			const tu_stringi&	method_name = id.get_function_name().to_tu_stringi();
+			const lfl_stringi&	method_name = id.get_function_name().to_tu_stringi();
 			if (method_name.length() > 0)
 			{
 				as_value	method;
@@ -549,7 +549,7 @@ namespace gameswf
 			return target.to_object();
 		}
 
-		const lfl_string& path = target.to_tu_string();
+		const lfl_string& path = target.to_lfl_string();
 		if (path.length() == 0)
 		{
 			return this;

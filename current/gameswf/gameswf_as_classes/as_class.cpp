@@ -10,7 +10,7 @@
 namespace gameswf
 {
 
-	bool	as_class::find_property( const tu_stringi & name, as_value * val )
+	bool	as_class::find_property( const lfl_stringi & name, as_value * val )
 	{
 		if( get_member( name, val ) )
 		{

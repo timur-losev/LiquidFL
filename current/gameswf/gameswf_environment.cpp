@@ -44,7 +44,7 @@ namespace gameswf
 			return URL;
 		}
 
-		tu_stringi fn_ext = fn.utf8_substring(fn.size() - 4, fn.size());
+		lfl_stringi fn_ext = fn.utf8_substring(fn.size() - 4, fn.size());
 		if (fn_ext == ".swf")
 		{
 			return SWF;
@@ -460,7 +460,7 @@ namespace gameswf
 	{
 		if (target.is_string())
 		{
-			lfl_string path = target.to_tu_string();
+			lfl_string path = target.to_lfl_string();
 			IF_VERBOSE_ACTION(log_msg("-------------- ActionSetTarget2: %s", path.c_str()));
 			if (path.size() > 0)
 			{
@@ -744,7 +744,7 @@ namespace gameswf
 		return target.to_object();
 	}
 
-	bool	as_environment::set_member(const tu_stringi& name, const as_value& val)
+	bool	as_environment::set_member(const lfl_stringi& name, const as_value& val)
 	{
 		if (m_target != NULL)
 		{
@@ -753,7 +753,7 @@ namespace gameswf
 		return false;
 	}
 
-	bool	as_environment::get_member(const tu_stringi& name, as_value* val)
+	bool	as_environment::get_member(const lfl_stringi& name, as_value* val)
 	{
 		if (m_target != NULL)
 		{

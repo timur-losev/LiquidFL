@@ -138,7 +138,7 @@ namespace gameswf
 	bool sprite_instance::can_handle_mouse_event()
 	// Return true if we have any mouse event handlers.
 	{
-		static const tu_stringi FN_NAMES[] =
+		static const lfl_stringi FN_NAMES[] =
 		{
 			"onKeyPress",
 			"onRelease",
@@ -658,7 +658,7 @@ namespace gameswf
 		// Attach event handlers (if any).
 		for (int i = 0, n = event_handlers.size(); i < n; i++)
 		{
-			const tu_stringi& name = event_handlers[i]->m_event.get_function_name();
+			const lfl_stringi& name = event_handlers[i]->m_event.get_function_name();
 			ch->set_member(name, event_handlers[i]->m_method);
 		}
 
@@ -878,7 +878,7 @@ namespace gameswf
 	}
 
 	// useful for catching of the calls
-	bool sprite_instance::set_member(const tu_stringi& name, const as_value& val)
+	bool sprite_instance::set_member(const lfl_stringi& name, const as_value& val)
 	{
 		// first try built-ins sprite properties
 		as_standard_member	std_member = get_standard_member(name);
@@ -915,7 +915,7 @@ namespace gameswf
 	// Set *val to the value of the named member and
 	// return true, if we have the named member.
 	// Otherwise leave *val alone and return false.
-	bool sprite_instance::get_member(const tu_stringi& name, as_value* val)
+	bool sprite_instance::get_member(const lfl_stringi& name, as_value* val)
 	{
 
 		// first try built-ins sprite methods
@@ -1127,7 +1127,7 @@ namespace gameswf
 
 		// In ActionScript 2.0, event method names are CASE SENSITIVE.
 		// In ActionScript 1.0, event method names are CASE INSENSITIVE.
-		const tu_stringi&	method_name = id.get_function_name().to_tu_stringi();
+		const lfl_stringi&	method_name = id.get_function_name().to_tu_stringi();
 		as_value	method;
 		if (get_member(method_name, &method))
 		{

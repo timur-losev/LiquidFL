@@ -58,30 +58,75 @@ namespace gameswf
 		}
 	};
 
-	struct namespac
+	struct as3_namespace
 	{
-		enum kind
-		{
-			CONSTANT_Undefined = 0,
-			CONSTANT_Namespace = 0x08,
-			CONSTANT_PackageNamespace = 0x16,
-			CONSTANT_PackageInternalNs = 0x17,
-			CONSTANT_ProtectedNamespace = 0x18,
-			CONSTANT_ExplicitNamespace = 0x19,
-			CONSTANT_StaticProtectedNs = 0x1A,
-			CONSTANT_PrivateNs = 0x05
-		};
+        struct kind
+        {
+            enum Enum
+            {
+                CONSTANT_Undefined = 0,
+                CONSTANT_Namespace = 0x08,
+                CONSTANT_PackageNamespace = 0x16,
+                CONSTANT_PackageInternalNs = 0x17,
+                CONSTANT_ProtectedNamespace = 0x18,
+                CONSTANT_ExplicitNamespace = 0x19,
+                CONSTANT_StaticProtectedNs = 0x1A,
+                CONSTANT_PrivateNs = 0x05
+            };
 
-		kind m_kind;
-		int	m_name;
+            static lfl_string to_string(Enum e)
+            {
+                switch(e)
+                {
+                case CONSTANT_Undefined:
+                    return "CONSTANT_Undefined";
+                    break;
 
-		namespac() :
-			m_kind(CONSTANT_Undefined),
-			m_name(0)
-		{
-		}
+                case CONSTANT_Namespace:
+                    return "CONSTANT_Namespace";
+                    break;
 
-	};
+                case  CONSTANT_PackageNamespace:
+                    return "CONSTANT_PackageNamespace";
+                    break;
+
+                case  CONSTANT_PackageInternalNs:
+                    return "CONSTANT_PackageInternalNs";
+                    break;
+
+                case CONSTANT_ProtectedNamespace:
+                    return "CONSTANT_ProtectedNamespace";
+                    break;
+
+                case CONSTANT_ExplicitNamespace:
+                    return "CONSTANT_ExplicitNamespace";
+                    break;
+
+                case CONSTANT_StaticProtectedNs:
+                    return "CONSTANT_StaticProtectedNs";
+                    break;
+
+                case CONSTANT_PrivateNs:
+                    return "CONSTANT_PrivateNs";
+                    break;
+
+                default:
+                    assert("Default section in switch" && false);
+                    return "";
+                }
+            }
+        };
+
+        kind::Enum  m_kind;
+        int         m_name;
+
+        as3_namespace() :
+        m_kind(kind::CONSTANT_Undefined),
+            m_name(0)
+        {
+        }
+
+    };
 
     /*
         The metadata_info entry provides a means of embedding arbitrary key /value pairs into the ABC file. The 
@@ -162,7 +207,7 @@ namespace gameswf
 		array<Uint32> m_uinteger;
 		array<double> m_double;
 		array<lfl_string> m_string;
-		array<namespac> m_namespace;
+		array<as3_namespace> m_namespace;
 		array< array<int> > m_ns_set;
 		array<multiname> m_multiname;
 
@@ -247,6 +292,8 @@ namespace gameswf
 		instance_info* get_instance_info(const lfl_string& class_name) const;
 		class_info* get_class_info(const lfl_string& full_class_name) const;
 		class_info* get_class_info(int class_index) const;
+
+        const lfl_string& get_method_name(int mtid) const;
 	};
 }
 

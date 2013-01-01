@@ -36,7 +36,7 @@ namespace image { struct rgb; struct rgba; struct image_base; }
 // forward decl
 namespace jpeg { struct input; }
 class lfl_string;
-class tu_stringi;
+class lfl_stringi;
 
 // Forward decl for D3D render handlers, in case they are
 // instantiated.  Harmless on non-D3D platforms.

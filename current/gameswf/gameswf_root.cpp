@@ -637,8 +637,9 @@ namespace gameswf
 					if (adef)
 					{
 						as_environment env(m_player.get_ptr());
-						gameswf::call_method(adef->get_script_function(), 
-							&env, as_value(m_movie.get_ptr()), 0, 0);
+                        as_function* script_func = adef->get_script_function();
+                        as_value val(m_movie.get_ptr());
+						gameswf::call_method(script_func, &env, val, 0, 0);
 					}
 				}
 			}

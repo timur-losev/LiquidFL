@@ -44,7 +44,7 @@ namespace gameswf
 		x3ds_instance* x3ds = cast_to<x3ds_instance>(fn.this_ptr);
 		if (x3ds && fn.nargs == 2)
 		{
-			x3ds->m_map[fn.arg(0).to_tu_string()] = fn.arg(1);
+			x3ds->m_map[fn.arg(0).to_lfl_string()] = fn.arg(1);
 		}
 	}
 
@@ -101,7 +101,7 @@ namespace gameswf
 		}
 	}
 
-	bool	x3ds_instance::get_member(const tu_stringi& name, as_value* val)
+	bool	x3ds_instance::get_member(const lfl_stringi& name, as_value* val)
 	{
 		if (character::get_member(name, val) == false)
 		{
@@ -110,7 +110,7 @@ namespace gameswf
 		return true;
 	}
 
-	bool	x3ds_instance::set_member(const tu_stringi& name, const as_value& val)
+	bool	x3ds_instance::set_member(const lfl_stringi& name, const as_value& val)
 	{
 		if (character::set_member(name, val) == false)
 		{
@@ -505,7 +505,7 @@ namespace gameswf
 		bool called = false;
 
 		// Check for member function.
-		const tu_stringi&	method_name = id.get_function_name().to_tu_stringi();
+		const lfl_stringi&	method_name = id.get_function_name().to_tu_stringi();
 		if (method_name.length() > 0)
 		{
 			as_value	method;

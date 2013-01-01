@@ -15,8 +15,8 @@ namespace gameswf
 
     void metadata_info::read(lfl_stream* in, abc_def* abc)
     {
-        m_item_count = in->read_vu30();
         m_name = in->read_vu30();
+        m_item_count = in->read_vu30();
 
 #if 0
         // metadata_info
@@ -134,7 +134,7 @@ namespace gameswf
 
 		if (m_attr & ATTR_Metadata)
 		{
-			assert(0 && "test");
+			//assert(0 && "test");
 			int n = in->read_vu30();
 			m_metadata.resize(n);
 			for (int i = 0; i < n; i++)
@@ -225,7 +225,7 @@ namespace gameswf
 		}
 	}
 
-	// exception_info
+	// as3_exception_info
 	// {
 	//		u30 from
 	//		u30 to
@@ -233,7 +233,7 @@ namespace gameswf
 	//		u30 exc_type
 	//		u30 var_name
 	// }
-	void except_info::read(lfl_stream* in, abc_def* abc)
+	void as3_exception_info::read(lfl_stream* in, abc_def* abc)
 	{
 		m_from = in->read_vu30();
 		m_to = in->read_vu30();
@@ -442,7 +442,7 @@ namespace gameswf
 		if (n > 0)
 		{
 			m_string.resize(n);
-			m_string[0] = "";	// default value
+			m_string[0] = "*";	// default value
 			for (int i = 1; i < n; i++)
 			{
 				int len = in->read_vs32();
@@ -460,38 +460,40 @@ namespace gameswf
 		if (n > 0)
 		{
 			m_namespace.resize(n);
-			namespac ns;
+			as3_namespace ns;
 			m_namespace[0] = ns;	// default value
 
 			for (int i = 1; i < n; i++)
 			{
-				ns.m_kind = static_cast<namespac::kind>(in->read_u8());
+				ns.m_kind = static_cast<as3_namespace::kind::Enum>(in->read_u8());
 				ns.m_name = in->read_vu30();
 				m_namespace[i] = ns;
 
-				// User-defined namespaces have kind CONSTANT_Namespace or
-				// CONSTANT_ExplicitNamespace and a non-empty name. 
-				// System namespaces have empty names and one of the other kinds
-				switch (ns.m_kind)
-				{
-					case namespac::CONSTANT_Namespace:
-					case namespac::CONSTANT_ExplicitNamespace:
-						//assert(*get_string(ns.m_name) != 0);
-						break;
-					case namespac::CONSTANT_PackageNamespace:
-					case namespac::CONSTANT_PackageInternalNs:
-					case namespac::CONSTANT_ProtectedNamespace:
-					case namespac::CONSTANT_StaticProtectedNs:
-					case namespac::CONSTANT_PrivateNs:
-						//assert(*get_string(ns.m_name) == 0);
-						break;
-					default:
-						assert(0);
-				}
-				IF_VERBOSE_PARSE(log_msg("cpool_info: namespace[%d]='%s', kind=0x%02X\n", 
-					i, get_string(ns.m_name), ns.m_kind));
-			}
-		}
+                // User-defined namespaces have kind CONSTANT_Namespace or
+                // CONSTANT_ExplicitNamespace and a non-empty name. 
+                // System namespaces have empty names and one of the other kinds
+                switch (ns.m_kind)
+                {
+                case as3_namespace::kind::CONSTANT_Namespace:
+                case as3_namespace::kind::CONSTANT_ExplicitNamespace:
+                    //assert(*get_string(ns.m_name) != 0);
+                    break;
+                case as3_namespace::kind::CONSTANT_PackageNamespace:
+                case as3_namespace::kind::CONSTANT_PackageInternalNs:
+                case as3_namespace::kind::CONSTANT_ProtectedNamespace:
+                case as3_namespace::kind::CONSTANT_StaticProtectedNs:
+                case as3_namespace::kind::CONSTANT_PrivateNs:
+                    //assert(*get_string(ns.m_name) == 0);
+                    break;
+                default:
+                    assert(0);
+                }
+                IF_VERBOSE_PARSE(log_msg("cpool_info: namespace[%d]='%s', kind='%s'\n", 
+                    i,
+                    get_string(ns.m_name),
+                    as3_namespace::kind::to_string(ns.m_kind).c_str()));
+            }
+        }
 		else
 		{
 			IF_VERBOSE_PARSE(log_msg("cpool_info: no namespace pool\n"));
@@ -696,6 +698,18 @@ namespace gameswf
 
 		return NULL;
 	}
+
+    const lfl_string& abc_def::get_method_name( int mtid ) const
+    {
+        assert(mtid >= 0 && mtid < m_method.size());
+
+        const as_3_function& m = *m_method[mtid].get();
+        int name = m.m_name;
+
+        assert(name >= 0 && name < m_string.size());
+        return m_string[name];
+    }
+
 };	// end namespace gameswf
 
 

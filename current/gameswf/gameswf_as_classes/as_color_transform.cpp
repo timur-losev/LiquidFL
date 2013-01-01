@@ -24,7 +24,7 @@ namespace gameswf
 	};
 
 	static stringi_hash<as_color_transform_member>	s_color_transform_member_map;
-	static as_color_transform_member   get_color_transform_member(const tu_stringi& name);
+	static as_color_transform_member   get_color_transform_member(const lfl_stringi& name);
 
 
 	// ColorTranform([redMultiplier:Number], [greenMultiplier:Number], [blueMultiplier:Number], [alphaMultiplier:Number], [redOffset:Number], [greenOffset:Number], [blueOffset:Number], [alphaOffset:Number])
@@ -63,7 +63,7 @@ namespace gameswf
 	{
 	}
 
-	bool	as_color_transform::set_member(const tu_stringi& name, const as_value& val)
+	bool	as_color_transform::set_member(const lfl_stringi& name, const as_value& val)
 	{
 		as_color_transform_member member = get_color_transform_member( name );
 
@@ -140,7 +140,7 @@ namespace gameswf
 		return as_object::set_member( name, val );
 	}
 
-	bool	as_color_transform::get_member(const tu_stringi& name, as_value* val)
+	bool	as_color_transform::get_member(const lfl_stringi& name, as_value* val)
 	{
 		as_color_transform_member member = get_color_transform_member( name );
 
@@ -190,7 +190,7 @@ namespace gameswf
 		return as_object::get_member( name, val );
 	}
 
-	as_color_transform_member	get_color_transform_member(const tu_stringi& name)
+	as_color_transform_member	get_color_transform_member(const lfl_stringi& name)
 	{
 		if (s_color_transform_member_map.size() == 0)
 		{

@@ -747,22 +747,22 @@ namespace gameswf
 
 		if (tf->get_member("align", &val))
 		{
-			if (val.to_tu_string() == "left")
+			if (val.to_lfl_string() == "left")
 			{
 				m_alignment = edit_text_character_def::ALIGN_LEFT;
 			}
 			else
-			if (val.to_tu_string() == "center")
+			if (val.to_lfl_string() == "center")
 			{
 				m_alignment = edit_text_character_def::ALIGN_CENTER;
 			}
 			else
-			if (val.to_tu_string() == "right")
+			if (val.to_lfl_string() == "right")
 			{
 				m_alignment = edit_text_character_def::ALIGN_RIGHT;
 			}
 			else
-			if (val.to_tu_string() == "justify")
+			if (val.to_lfl_string() == "justify")
 			{
 				m_alignment = edit_text_character_def::ALIGN_JUSTIFY;
 			}
@@ -771,7 +771,7 @@ namespace gameswf
 		lfl_string fontname = m_font->get_name();
 		if (tf->get_member("font", &val))
 		{
-			fontname = val.to_tu_string();
+			fontname = val.to_lfl_string();
 		}
 
 		bool bold = m_font->is_bold();
@@ -1133,9 +1133,9 @@ namespace gameswf
 				as_value val;
 				if (ch->get_member(var, &val) && val.to_object() != this)
 				{
-					if (val.to_tu_string() != m_text)
+					if (val.to_lfl_string() != m_text)
 					{
-						set_text(val.to_tu_string().c_str());
+						set_text(val.to_lfl_string().c_str());
 					}
 				}
 			}
@@ -1145,7 +1145,7 @@ namespace gameswf
 	}
 
 
-	bool	edit_text_character::set_member(const tu_stringi& name, const as_value& val)
+	bool	edit_text_character::set_member(const lfl_stringi& name, const as_value& val)
 	// We have a "text" member.
 	{
 		// first try text field properties
@@ -1162,7 +1162,7 @@ namespace gameswf
 
 			case M_TEXT:
 			{
-				set_text_value(val.to_tu_string());
+				set_text_value(val.to_lfl_string());
 				break;
 			}
 
@@ -1198,12 +1198,12 @@ namespace gameswf
 				// There are two values: "dynamic", which specifies a dynamic text field
 				// that cannot be edited by the user, and "input", 
 				// which specifies an input text field.
-				if (val.to_tu_stringi() == "input")
+				if (val.to_lfl_stringi() == "input")
 				{
 					m_def->m_readonly = false;
 				}
 				else
-				if (val.to_tu_stringi() == "dynamic")
+				if (val.to_lfl_stringi() == "dynamic")
 				{
 					m_def->m_readonly = true;
 				}
@@ -1223,7 +1223,7 @@ namespace gameswf
 	}
 
 
-	bool	edit_text_character::get_member(const tu_stringi& name, as_value* val)
+	bool	edit_text_character::get_member(const lfl_stringi& name, as_value* val)
 	{
 		// first try text field properties
 		as_standard_member	std_member = get_standard_member(name);

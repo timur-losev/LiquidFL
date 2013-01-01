@@ -102,7 +102,7 @@ namespace gameswf
 		}
 	}
 
-	bool get_builtin(builtin_object id, const tu_stringi& name, as_value* val)
+	bool get_builtin(builtin_object id, const lfl_stringi& name, as_value* val)
 	{
 		if (s_standard_method_map[id])
 		{
@@ -322,7 +322,7 @@ namespace gameswf
 		s_fscommand_handler = handler;
 	}
 
-	as_standard_member	get_standard_member(const tu_stringi& name)
+	as_standard_member	get_standard_member(const lfl_stringi& name)
 	{
 		if (s_standard_property_map.size() == 0)
 		{

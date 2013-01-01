@@ -76,7 +76,7 @@ namespace gameswf
 	const char*	as_value::to_string() const
 	// Conversion to string.
 	{
-		return to_tu_string().c_str();
+		return to_lfl_string().c_str();
 	}
 
 	const char*	as_value::to_xstring() const
@@ -88,17 +88,17 @@ namespace gameswf
 			snprintf(buf, 16, "0x%p", m_object.get());
 			return buf;
 		}
-		return to_tu_string().c_str();
+		return to_lfl_string().c_str();
 	}
 
 
-	const tu_stringi&	as_value::to_tu_stringi() const
+	const lfl_stringi&	as_value::to_lfl_stringi() const
 	{
-		return reinterpret_cast<const tu_stringi&>(to_tu_string());
+		return reinterpret_cast<const lfl_stringi&>(to_lfl_string());
 	}
 
 
-	const lfl_string&	as_value::to_tu_string() const
+	const lfl_string&	as_value::to_lfl_string() const
 	// Conversion to const lfl_string&.
 	{
 		switch (m_type)
@@ -166,7 +166,7 @@ namespace gameswf
 			{
 				as_value val;
 				get_property(&val);
-				m_string = val.to_tu_string();
+				m_string = val.to_lfl_string();
 				break;
 			}
 
@@ -417,7 +417,7 @@ namespace gameswf
 				return v.m_type == UNDEFINED;
 
 			case STRING:
-				return m_string == v.to_tu_string();
+				return m_string == v.to_lfl_string();
 
 			case NUMBER:
 				return m_number == v.to_number();
@@ -820,7 +820,7 @@ namespace gameswf
 			}
 			else if( first.is_string() )
 			{
-				return first.to_tu_string() == second.to_tu_string();
+				return first.to_lfl_string() == second.to_lfl_string();
 			}
 			else if( first.is_bool() )
 			{

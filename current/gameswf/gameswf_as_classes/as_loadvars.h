@@ -72,8 +72,8 @@ namespace gameswf
 		// copy variables into target
 		void	copy_to(as_object* target);
 
-		exported_module virtual bool	set_member(const tu_stringi& name, const as_value& val);
-		exported_module virtual bool	get_member(const tu_stringi& name, as_value* val);
+		exported_module virtual bool	set_member(const lfl_stringi& name, const as_value& val);
+		exported_module virtual bool	get_member(const lfl_stringi& name, as_value* val);
 
 	private:
 

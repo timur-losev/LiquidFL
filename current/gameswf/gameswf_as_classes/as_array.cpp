@@ -22,7 +22,7 @@ namespace gameswf
 			lfl_string result;
 			for (int index = 0; index < a->size(); ++index)
 			{
-				result += a->m_array[index].to_tu_string();
+				result += a->m_array[index].to_lfl_string();
 				if (index < a->size() - 1)
 				{
 					result += delimiter;
@@ -380,7 +380,7 @@ namespace gameswf
 		m_string_value = "";
 		for (int i = 0; i < size(); i++)
 		{
-			m_string_value += m_array[i].to_tu_string();
+			m_string_value += m_array[i].to_lfl_string();
 			if (i < size() - 1)
 			{
 				m_string_value +=  ",";
@@ -402,7 +402,7 @@ namespace gameswf
 				bool do_swap = false;
 				if (compare_function == NULL)
 				{
-					if (m_array[i].to_tu_string() > m_array[j].to_tu_string())
+					if (m_array[i].to_lfl_string() > m_array[j].to_lfl_string())
 					{
 						do_swap = true;
 					}
@@ -446,7 +446,7 @@ namespace gameswf
 		}
 	}
 
-	bool	as_array::get_member(const tu_stringi& name, as_value* val)
+	bool	as_array::get_member(const lfl_stringi& name, as_value* val)
 	{
 		int index;
 		if (string_to_number(&index, name.c_str(), 10))
@@ -460,7 +460,7 @@ namespace gameswf
 		return as_object::get_member(name, val);
 	}
 
-	bool	as_array::set_member(const tu_stringi& name, const as_value& val)
+	bool	as_array::set_member(const lfl_stringi& name, const as_value& val)
 	{
 		int index;
 		if (string_to_number(&index, name.c_str(), 10))

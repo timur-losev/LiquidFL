@@ -22,7 +22,7 @@ namespace gameswf
 
 		as_sharedobject( player * player );
 
-		bool	get_member(const tu_stringi& name, as_value* val);
+		bool	get_member(const lfl_stringi& name, as_value* val);
 
 		static gc_ptr<as_object> get_local( const lfl_string & name, player * player );
 

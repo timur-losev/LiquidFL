@@ -80,11 +80,11 @@ namespace gameswf
 		exported_module virtual bool to_bool() { return true; }
 		exported_module virtual const char*	type_of() { return "object"; }
 
-		exported_module void	builtin_member(const tu_stringi& name, const as_value& val); 
-		exported_module void	call_watcher(const tu_stringi& name, const as_value& old_val, as_value* new_val);
-		exported_module virtual bool	set_member(const tu_stringi& name, const as_value& val);
-		exported_module virtual bool	get_member(const tu_stringi& name, as_value* val);
-		exported_module virtual bool	find_property( const tu_stringi & name, as_value * val );
+		exported_module void	builtin_member(const lfl_stringi& name, const as_value& val); 
+		exported_module void	call_watcher(const lfl_stringi& name, const as_value& old_val, as_value* new_val);
+		exported_module virtual bool	set_member(const lfl_stringi& name, const as_value& val);
+		exported_module virtual bool	get_member(const lfl_stringi& name, as_value* val);
+		exported_module virtual bool	find_property( const lfl_stringi & name, as_value * val );
 		exported_module virtual bool	on_event(const event_id& id);
 		exported_module virtual	void enumerate(as_environment* env);
 		exported_module virtual as_object* get_proto() const;

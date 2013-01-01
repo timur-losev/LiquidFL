@@ -67,7 +67,7 @@ namespace file_plugin
 		{
 			if (params.size() >= 2)
 			{
-				return new file(player, params[0].to_tu_string(), params[1].to_tu_string());
+				return new file(player, params[0].to_lfl_string(), params[1].to_lfl_string());
 			}
 			log_error("new File(): not enough args\n");
 			return NULL;

@@ -16,7 +16,7 @@ namespace gameswf
 
 	void string_char_code_at(const function_call& fn)
 	{
-		const lfl_string& str = fn.this_value.to_tu_string();
+		const lfl_string& str = fn.this_value.to_lfl_string();
 
 		int	index = fn.arg(0).to_int();
 		if (index >= 0 && index < str.utf8_length())
@@ -29,7 +29,7 @@ namespace gameswf
   
 	void string_concat(const function_call& fn)
 	{
-		const lfl_string& str = fn.this_value.to_tu_string();
+		const lfl_string& str = fn.this_value.to_lfl_string();
 
 		lfl_string result(str);
 		for (int i = 0; i < fn.nargs; i++)
@@ -57,7 +57,7 @@ namespace gameswf
 
 	void string_index_of(const function_call& fn)
 	{
-		const lfl_string& sstr = fn.this_value.to_tu_string();
+		const lfl_string& sstr = fn.this_value.to_lfl_string();
 
 		if (fn.nargs < 1)
 		{
@@ -86,7 +86,7 @@ namespace gameswf
 
 	void string_last_index_of(const function_call& fn)
 	{
-		const lfl_string& sstr = fn.this_value.to_tu_string();
+		const lfl_string& sstr = fn.this_value.to_lfl_string();
 
 		if (fn.nargs < 1)
 		{
@@ -119,7 +119,7 @@ namespace gameswf
 	
 	void string_slice(const function_call& fn)
 	{
-		const lfl_string& this_str = fn.this_value.to_tu_string();
+		const lfl_string& this_str = fn.this_value.to_lfl_string();
 
 		int len = this_str.utf8_length();
 		int start = 0;
@@ -149,7 +149,7 @@ namespace gameswf
 
 	void string_split(const function_call& fn)
 	{
-		const lfl_string& this_str = fn.this_value.to_tu_string();
+		const lfl_string& this_str = fn.this_value.to_lfl_string();
 
 		gc_ptr<as_array> arr = new as_array(fn.get_player());
 
@@ -182,7 +182,7 @@ namespace gameswf
 				as_value val;
 				as_value index(i);
 				val.set_tu_string(word);
-				arr->set_member(index.to_tu_string(), val);
+				arr->set_member(index.to_lfl_string(), val);
 				p = n;
 				i++;
 			}
@@ -196,7 +196,7 @@ namespace gameswf
 					as_value val;
 					as_value index(i);
 					val.set_tu_string(word);
-					arr->set_member(index.to_tu_string(), val);
+					arr->set_member(index.to_lfl_string(), val);
 					i++;
 
 					if (match)
@@ -224,7 +224,7 @@ namespace gameswf
 	// public substr(start:Number, length:Number) : String
 	void string_substr(const function_call& fn)
 	{
-		const lfl_string& this_str = fn.this_value.to_tu_string();
+		const lfl_string& this_str = fn.this_value.to_lfl_string();
 
 		if (fn.nargs < 1)
 		{
@@ -264,7 +264,7 @@ namespace gameswf
 
 	void string_substring(const function_call& fn)
 	{
-		const lfl_string& this_str = fn.this_value.to_tu_string();
+		const lfl_string& this_str = fn.this_value.to_lfl_string();
 
 		// Pull a slice out of this_string.
 		int	start = 0;
@@ -289,19 +289,19 @@ namespace gameswf
 
 	void string_to_lowercase(const function_call& fn)
 	{
-		const lfl_string& this_str = fn.this_value.to_tu_string();
+		const lfl_string& this_str = fn.this_value.to_lfl_string();
 		fn.result->set_tu_string(this_str.utf8_to_lower());
 	}
 	
 	void string_to_uppercase(const function_call& fn) 
 	{
-		const lfl_string& this_str = fn.this_value.to_tu_string();
+		const lfl_string& this_str = fn.this_value.to_lfl_string();
 		fn.result->set_tu_string(this_str.utf8_to_upper());
 	}
 
 	void string_char_at(const function_call& fn)
 	{
-		const lfl_string& this_str = fn.this_value.to_tu_string();
+		const lfl_string& this_str = fn.this_value.to_lfl_string();
 
 		int	index = fn.arg(0).to_int();
 		if (index >= 0 && index < this_str.utf8_length()) 
@@ -315,13 +315,13 @@ namespace gameswf
 	
 	void string_to_string(const function_call& fn)
 	{
-		const lfl_string& str = fn.this_value.to_tu_string();
+		const lfl_string& str = fn.this_value.to_lfl_string();
 		fn.result->set_tu_string(str);
 	}
 
 	void string_length(const function_call& fn)
 	{
-		const lfl_string& str = fn.this_value.to_tu_string();
+		const lfl_string& str = fn.this_value.to_lfl_string();
 		fn.result->set_int(str.size());
 	}
 

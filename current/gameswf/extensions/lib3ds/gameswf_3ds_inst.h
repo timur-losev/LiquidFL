@@ -47,8 +47,8 @@ namespace gameswf
 		virtual void	display();
 		void	set_light();
 		virtual void	advance(float delta_time);
-		virtual bool	get_member(const tu_stringi& name, as_value* val);
-		virtual bool	set_member(const tu_stringi& name, const as_value& val);
+		virtual bool	get_member(const lfl_stringi& name, as_value* val);
+		virtual bool	set_member(const lfl_stringi& name, const as_value& val);
 		virtual bool	on_event(const event_id& id);
 
 		// binds texture to triangle (from mesh)

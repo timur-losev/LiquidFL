@@ -27,8 +27,8 @@ namespace gameswf
 
 		as_transform(player* player, character* movie_clip);
 
-		exported_module virtual bool	set_member(const tu_stringi& name, const as_value& val);
-		exported_module virtual bool	get_member(const tu_stringi& name, as_value* val);
+		exported_module virtual bool	set_member(const lfl_stringi& name, const as_value& val);
+		exported_module virtual bool	get_member(const lfl_stringi& name, as_value* val);
 
 		gc_ptr<as_color_transform> m_color_transform;
 		gc_ptr<character> m_movie;

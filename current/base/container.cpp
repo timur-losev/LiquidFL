@@ -570,7 +570,7 @@ void	test_hash_speed()
 
 void	test_stringi()
 {
-	tu_stringi	a, b;
+	lfl_stringi	a, b;
 
 	// Equality.
 	a = "this is a test";
@@ -626,8 +626,8 @@ void	test_stringi_hash()
 	assert(a.is_empty() == true);
 
 	// Hammer on one key that differs only by case.
-	tu_stringi	original_key("thisisatest");
-	tu_stringi	key(original_key);
+	lfl_stringi	original_key("thisisatest");
+	lfl_stringi	key(original_key);
 	a.add(key, 1234567);
 
 	int	variations = 1 << key.length();

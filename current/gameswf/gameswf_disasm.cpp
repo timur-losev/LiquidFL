@@ -415,7 +415,7 @@ namespace gameswf
 			s_instr.add(0xD6, inst_info_avm2("setlocal_2"));
 			s_instr.add(0xD7, inst_info_avm2("setlocal_3"));
 			// no inst for 0xD8 - > 0xEE
-			s_instr.add(0xEF, inst_info_avm2("debug", ARG_BYTE, ARG_STRING, ARG_BYTE, ARG_SHORT));
+			s_instr.add(0xEF, inst_info_avm2("debug", ARG_BYTE, ARG_STRING, ARG_BYTE, ARG_SHORT, ARG_END));
 			s_instr.add(0xF0, inst_info_avm2("debugline", ARG_SHORT, ARG_END));
 			s_instr.add(0xF1, inst_info_avm2("debugfile", ARG_STRING, ARG_END));
 
@@ -430,7 +430,7 @@ namespace gameswf
 			inst_info_avm2 ii(0);
 			if (s_instr.get(opcode, &ii))
 			{
-				printf(":	%s\n", ii.m_instruction);
+				printf(":	%s its code 0x%02X\n", ii.m_instruction, opcode);
 				if( ii.has_argument() )
 				{
 					ip += ii.process( def, &data[ip] );
