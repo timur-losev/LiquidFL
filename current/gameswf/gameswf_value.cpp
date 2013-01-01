@@ -366,7 +366,7 @@ namespace gameswf
 				break;
 
 			case STRING:
-				set_tu_string(v.m_string);
+				set_lfl_string(v.m_string);
 				m_flags = v.m_flags;
 				break;
 
@@ -758,7 +758,7 @@ namespace gameswf
 		return false;
 	}
 
-	void	as_value::set_tu_string(const lfl_string& str)
+	void	as_value::set_lfl_string(const lfl_string& str)
 	{
 		drop_refs();
 		m_type = STRING;
@@ -857,11 +857,52 @@ namespace gameswf
 	}
 
 	//ECMA-262 11.8.5
-	as_value as_value::abstract_relational_comparison( const as_value & first, const as_value & second )
+	bool as_value::abstract_relational_comparison( const as_value & first, const as_value & second, as_value& retval )
 	{
-		return as_value( first.to_number()  < second.to_number() );
+        if (first.is_string() && second.is_string())
+        {
+            retval.set_bool(first.to_string() < second.to_string());
+            return true;
+        }
+
+        retval.set_bool(first.to_number()  < second.to_number());
+		return true;
 		// todo
 	}
+
+    bool as_value::strict_equality( const as_value& first, const as_value& second )
+    {
+        if (first.m_type == second.m_type)
+        {
+            switch(first.m_type)
+            {
+            case UNDEFINED:
+                {
+                    return true;
+                }
+                break;
+
+            case OBJECT:
+            case BOOLEAN:
+            case STRING:
+                {
+                    return first == second;
+                }
+
+            case NUMBER:
+                {
+                    //can be neglected pro speed
+                    const double f = first.to_number();
+                    const double s = second.to_number();
+                    if (isnan(f) && isnan(s)) return true;
+
+                    return f == s;
+                }
+                break;
+            }
+        }
+        return false;
+    }
 
 	//
 	//	as_property

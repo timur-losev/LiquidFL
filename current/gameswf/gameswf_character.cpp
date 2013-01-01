@@ -118,7 +118,7 @@ namespace gameswf
 				character* parent = get_parent();
 				if (parent == NULL)	// root
 				{
-					val->set_tu_string("/");
+					val->set_lfl_string("/");
 					return true;
 				}
 
@@ -139,12 +139,12 @@ namespace gameswf
 					s += get_name();
 				}
 
-				val->set_tu_string(s);
+				val->set_lfl_string(s);
 				return true;
 			}
 			case M_NAME:
 			{
-				val->set_tu_string(get_name());
+				val->set_lfl_string(get_name());
 				return true;
 			}
 			case M_DROPTARGET:

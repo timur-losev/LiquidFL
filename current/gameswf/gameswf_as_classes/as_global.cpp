@@ -198,7 +198,7 @@ namespace gameswf
 	void	as_global_get_version(const function_call& fn)
 	// Returns a string containing Flash Player version and platform information.
 	{
-		fn.result->set_tu_string(get_gameswf_version());
+		fn.result->set_lfl_string(get_gameswf_version());
 	}
 
 

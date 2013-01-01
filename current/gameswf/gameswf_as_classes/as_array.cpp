@@ -28,7 +28,7 @@ namespace gameswf
 					result += delimiter;
 				}
 			}
-			fn.result->set_tu_string(result);
+			fn.result->set_lfl_string(result);
 		}
 	}
 
@@ -37,7 +37,7 @@ namespace gameswf
 		as_array* a = cast_to<as_array>(fn.this_ptr);
 		if (a)
 		{
-			fn.result->set_tu_string(a->to_string());
+			fn.result->set_lfl_string(a->to_string());
 		}
 	}
 

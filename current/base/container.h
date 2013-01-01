@@ -1512,7 +1512,7 @@ public:
 
     // If you need a const lfl_stringi, don't create a new object;
     // these things have the same internal representation.
-    exported_module const lfl_stringi&	to_tu_stringi() const { return *(lfl_stringi*) this; }
+    exported_module const lfl_stringi&	to_lfl_stringi() const { return *(lfl_stringi*) this; }
 
     // operator= returns void; if you want to know why, ask Charles Bloom :)
     // (executive summary: a = b = c is an invitation to bad code)
@@ -1834,8 +1834,8 @@ public:
     lfl_stringi	operator+(const char* str) const { return lfl_stringi(m_string + str); }
 
     // The special stuff.
-    lfl_string& to_tu_string() { return m_string; }
-    const lfl_string& to_tu_string() const { return m_string; }
+    lfl_string& to_lfl_string() { return m_string; }
+    const lfl_string& to_lfl_string() const { return m_string; }
 
     bool	operator==(const char* str) const
     {

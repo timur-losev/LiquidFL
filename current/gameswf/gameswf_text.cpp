@@ -1238,7 +1238,7 @@ namespace gameswf
 				}break;
 
 			case M_TEXT:
-				val->set_tu_string(m_text);
+				val->set_lfl_string(m_text);
 				return true;
 
 			case M_TEXTCOLOR:
@@ -1268,7 +1268,7 @@ namespace gameswf
 				return true;
 
 			case M_TYPE:
-				val->set_tu_string(m_def->m_readonly ? "dynamic" : "input");
+				val->set_lfl_string(m_def->m_readonly ? "dynamic" : "input");
 				return true;
 
 			case M_BACKGROUNDCOLOR:

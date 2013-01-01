@@ -124,7 +124,7 @@ namespace gameswf
 
 		assert(loadvars);
 
-		fn.result->set_tu_string(loadvars->override_to_string());
+		fn.result->set_lfl_string(loadvars->override_to_string());
 	}
 
 	as_loadvars::as_loadvars(player* player) :
@@ -377,21 +377,21 @@ namespace gameswf
 			return as_object::set_member( name, val );
 		}
 
-		m_values.set( name.to_tu_string(), val.to_lfl_string() );
+		m_values.set( name.to_lfl_string(), val.to_lfl_string() );
 
 		return true;
 	}
 
 	bool	as_loadvars::get_member(const lfl_stringi& name, as_value* val)
 	{
-		string_hash<lfl_string>::iterator it = m_values.find( name.to_tu_string() );
+		string_hash<lfl_string>::iterator it = m_values.find( name.to_lfl_string() );
 		if( it != m_values.end() )
 		{
 			val->set_string( it->second );
 			return true;
 		}
 
-		string_hash<lfl_string>::iterator it2 = m_received_values.find( name.to_tu_string() );
+		string_hash<lfl_string>::iterator it2 = m_received_values.find( name.to_lfl_string() );
 		if( it2 != m_received_values.end() )
 		{
 			val->set_string( it2->second );

@@ -159,6 +159,8 @@ namespace gameswf
 
 		lfl_string get_multiname(int index, vm_stack & stack) const;
 
+    private:
+        int read_signed_offset_24(const membuf& codebuf, int cursor);
 	};
 
 }

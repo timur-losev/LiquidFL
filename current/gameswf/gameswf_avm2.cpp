@@ -149,9 +149,9 @@ void	as_3_function::execute(array<as_value>& lregister, as_environment* env, as_
         return;
     }
 
-    IF_VERBOSE_PARSE(log_msg("--->>>"));
+    IF_VERBOSE_PARSE(log_msg("--->>>\n"));
     IF_VERBOSE_PARSE(log_disasm_avm2(m_code, m_abc.get_ptr()));
-    IF_VERBOSE_PARSE(log_msg("<<<---"));
+    IF_VERBOSE_PARSE(log_msg("<<<---\n"));
 
     int ip = 0;
     do
@@ -167,13 +167,251 @@ void	as_3_function::execute(array<as_value>& lregister, as_environment* env, as_
                 stack.drop(1);
                 if (taken)
                 {
-                    int offset = m_code[ip] | m_code[ip+1]<<8 | m_code[ip+2]<<16;
+                    int offset = read_signed_offset_24(m_code, ip);
                     ip += offset;
                 }
 
                 ip += 3;
+
                 IF_VERBOSE_ACTION(log_msg("EX: iftrue\t %s\n", taken? "taken": "not taken"));
-            } break;
+            }
+            break;
+
+
+        //Branch if the first value is not greater than or equal to the second value.
+        case AS_OPCODE_IfNotGreaterThanOrEqual: //ifnge
+            {
+                as_value& v2 = stack.top(0);
+                as_value& v1 = stack.top(1);
+
+                //IF_VERBOSE_ACTION(log_msg("if (%f < %f)", v1.to_number(), v2.to_number()));
+
+                as_value taken;
+                bool is_nan = as_value::abstract_relational_comparison(v1, v2, taken);
+                UNUSED(is_nan);
+
+                bool val = taken.to_bool();
+                if (val)
+                {
+                    int offset = read_signed_offset_24(m_code, ip);
+                    ip += offset;
+                }
+
+                stack.drop(2);
+
+                ip += 3;
+                IF_VERBOSE_ACTION(log_msg("EX: ifnge\t %s\n", val? "taken": "not taken"));
+            }
+            break;
+
+        //Branch if the first value is less than the second value.
+        case AS_OPCODE_IfLessThan: //iflt
+            {
+                as_value& v2 = stack.top(0);
+                as_value& v1 = stack.top(1);
+
+                //IF_VERBOSE_ACTION(log_msg("if (%f < %f)", v1.to_number(), v2.to_number()));
+                as_value taken;
+                bool is_nan = as_value::abstract_relational_comparison(v1, v2, taken);
+                bool val = taken.to_bool();
+                if (val)
+                {
+                    int offset = read_signed_offset_24(m_code, ip);
+                    ip += offset;
+                }
+
+                stack.drop(2);
+
+                ip += 3;
+                IF_VERBOSE_ACTION(log_msg("EX: iflt\t %s\n", val? "taken": "not taken"));
+            }
+            break;
+
+        //Branch if the first value is less than or equal to the second value.
+        case AS_OPCODE_IfLessThanOrEqual: //ifle
+            {
+                as_value& v2 = stack.top(0);
+                as_value& v1 = stack.top(1);
+
+                //IF_VERBOSE_ACTION(log_msg("if (%f < %f)", v1.to_number(), v2.to_number()));
+                as_value less_val;
+                bool is_nan = as_value::abstract_relational_comparison(v2, v1, less_val);
+                UNUSED(is_nan);
+                bool less = less_val.to_bool();
+
+                if (!less) // v1 <= v2 is same v2 > v1
+                {
+                    int offset = read_signed_offset_24(m_code, ip);
+                    ip += offset;
+                }
+
+                stack.drop(2);
+
+                ip += 3;
+                IF_VERBOSE_ACTION(log_msg("EX: ifle\t %s\n", less? "not taken": "taken"));
+            }
+            break;
+
+        //Branch if the first value is greater than the second value.
+        case AS_OPCODE_IfGreaterThan: //ifgt
+            {
+                //Follows ECMA-262 11.9.3
+
+                as_value& v2 = stack.top(0);
+                as_value& v1 = stack.top(1);
+
+                //verbose numbers only 
+                //IF_VERBOSE_ACTION(log_msg("if (%f > %f)", v2.to_number(), v1.to_number()));
+                as_value taken;
+                bool is_nan = as_value::abstract_relational_comparison(v2, v1, taken);
+                UNUSED(is_nan);
+                bool val = taken.to_bool();
+                if (val)
+                {
+                    int offset = read_signed_offset_24(m_code, ip);
+                    ip += offset;
+                }
+
+                stack.drop(2);
+
+                ip += 3;
+                IF_VERBOSE_ACTION(log_msg("EX: ifgt\t %s\n", val? "taken": "not taken"));
+            }
+            break;
+
+        //Branch if the first value is greater than or equal to the second value.
+        case AS_OPCODE_IfGreaterThanOrEqual: //ifge
+            {
+                //Follows ECMA-262 11.9.3
+                as_value& v2 = stack.top(0);
+                as_value& v1 = stack.top(1);
+
+                as_value taken;
+                bool is_nan = as_value::abstract_relational_comparison(v1, v2, taken);
+                UNUSED(is_nan);
+                bool val = taken.to_bool();
+
+                if (!val)
+                {
+                    int offset = read_signed_offset_24(m_code, ip);
+                    ip += offset;
+                }
+
+                stack.drop(2);
+
+                ip += 3;
+                IF_VERBOSE_ACTION(log_msg("EX: ifge\t %s\n", val? "not taken": "taken"));
+            }
+            break;
+
+        //Branch if the first value is not less than the second value.
+        case AS_OPCODE_IfNotLessThan: //ifnlt
+            {
+                //Follows ECMA-262 11.9.3
+                as_value& v2 = stack.top(0);
+                as_value& v1 = stack.top(1);
+
+                as_value taken;
+                bool is_nan = as_value::abstract_relational_comparison(v1, v2, taken);
+                UNUSED(is_nan);
+
+                bool val = taken.to_bool();
+
+                if (!val)
+                {
+                    int offset = read_signed_offset_24(m_code, ip);
+                    ip += offset;
+                }
+
+                stack.drop(2);
+
+                ip += 3;
+                IF_VERBOSE_ACTION(log_msg("EX: ifnlt\t %s\n", val? "not taken": "taken"));
+            }
+            break;
+
+        //Branch if the first value is not less than or equal to the second value.
+        case AS_OPCODE_IfNotLessThanOrEqual: //ifnle
+            {
+                //Follows ECMA-262 11.9.3
+                as_value& v2 = stack.top(0);
+                as_value& v1 = stack.top(1);
+
+                as_value taken;
+                bool is_nan = as_value::abstract_relational_comparison(v2, v1, taken);
+                bool val = taken.to_bool();
+
+                if (val)
+                {
+                    int offset = read_signed_offset_24(m_code, ip);
+                    ip += offset;
+                }
+
+                stack.drop(2);
+
+                ip += 3;
+                IF_VERBOSE_ACTION(log_msg("EX: ifnle\t %s\n", val? "taken": "not taken"));
+            }
+            break;
+
+        //Branch if the first value is not greater than the second value.
+        case AS_OPCODE_NotGreaterThan: //ifngt
+            {
+                //Follows ECMA-262 11.9.3
+                as_value& v2 = stack.top(0);
+                as_value& v1 = stack.top(1);
+
+                as_value taken;
+                bool is_nan = as_value::abstract_relational_comparison(v2, v1, taken);
+                UNUSED(is_nan);
+                bool val = taken.to_bool();
+
+                if (!val)
+                {
+                    int offset = read_signed_offset_24(m_code, ip);
+                    ip += offset;
+                }
+
+                stack.drop(2);
+
+                ip += 3;
+                IF_VERBOSE_ACTION(log_msg("EX: ifnle\t %s\n", val? "not taken": "taken"));
+            }
+            break;
+
+        case AS_OPCODE_GreaterThan: //greaterthan
+            {
+                as_value& v2 = stack.top(0);
+                as_value& v1 = stack.top(1);
+
+                as_value taken;
+                bool is_nan = as_value::abstract_relational_comparison(v2, v1, taken);
+                UNUSED(is_nan);
+                stack.drop(2);
+
+                bool val = taken.to_bool();
+                stack.push(val);
+
+                IF_VERBOSE_ACTION(log_msg("EX: greaterthan\t %s\n", val? "taken": "not taken"));
+            }
+            break;
+
+        case AS_OPCODE_GreaterThanOrEqual: //greaterequals
+            {
+                as_value& v2 = stack.top(0);
+                as_value& v1 = stack.top(1);
+
+                as_value taken;
+                bool is_nan = as_value::abstract_relational_comparison(v1, v2, taken);
+                UNUSED(is_nan);
+                stack.drop(2);
+
+                bool val = !taken.to_bool();
+                stack.push(val);
+
+                IF_VERBOSE_ACTION(log_msg("EX: greaterequals\t %s\n", val? "taken": "not taken"));
+            }
+            break;
 
         case AS_OPCODE_IfFalse: // iffalse
             {
@@ -183,13 +421,29 @@ void	as_3_function::execute(array<as_value>& lregister, as_environment* env, as_
                 stack.drop(1);
                 if (taken)
                 {
-                    int offset = m_code[ip] | m_code[ip+1]<<8 | m_code[ip+2]<<16;
+                    int offset = read_signed_offset_24(m_code, ip);
                     ip += offset;
                 }
 
                 ip += 3;
                 IF_VERBOSE_ACTION(log_msg("EX: iffalse\t %s\n", taken? "taken": "not taken"));
             } break;
+
+        case AS_OPCODE_IfEqual: //ifeq
+            {
+                bool taken;
+                //Follows ECMA-262 11.9.3
+                taken = as_value::abstract_equality_comparison(scope[ scope.size() - 2 ], scope[ scope.size() - 1 ]);
+                if (taken)
+                {
+                    int offset = read_signed_offset_24(m_code, ip);
+                    ip += offset;
+                }
+
+                ip += 3;
+                IF_VERBOSE_ACTION(log_msg("EX: ifne\t %s\n", taken? "taken": "not taken"));
+            }
+            break;
 
         case AS_OPCODE_IfNotEqual: // ifne
             {
@@ -198,7 +452,7 @@ void	as_3_function::execute(array<as_value>& lregister, as_environment* env, as_
                 taken = !as_value::abstract_equality_comparison(scope[ scope.size() - 2 ], scope[ scope.size() - 1 ]);
                 if (taken)
                 {
-                    int offset = m_code[ip] | m_code[ip+1]<<8 | m_code[ip+2]<<16;
+                    int offset = read_signed_offset_24(m_code, ip);
                     ip += offset;
                 }
 
@@ -759,7 +1013,7 @@ void	as_3_function::execute(array<as_value>& lregister, as_environment* env, as_
                 {
                     lfl_string str = stack.top(1).to_string();
                     str += stack.top(0).to_string();
-                    stack.top(1).set_tu_string(str);
+                    stack.top(1).set_lfl_string(str);
                 }
                 else
                 {
@@ -767,6 +1021,24 @@ void	as_3_function::execute(array<as_value>& lregister, as_environment* env, as_
                 }
                 stack.drop(1);
             } break;
+
+        case AS_OPCODE_Decrement:
+        case AS_OPCODE_Decrement_i:
+            {
+                as_value& operand = stack.top(0);
+                operand.set_double(operand.to_number() - 1);
+                IF_VERBOSE_ACTION(log_msg("EX: decrement %f\n", operand.to_number()));
+            }
+            break;
+
+        case AS_OPCODE_Increment:
+        case AS_OPCODE_Increment_i:
+            {
+                as_value& operand = stack.top(0);
+                operand.set_double(operand.to_number() + 1);
+                IF_VERBOSE_ACTION(log_msg("EX: increment %f\n", operand.to_number()));
+            }
+            break;
 
         case AS_OPCODE_Multiply: // multiply
             {
@@ -788,7 +1060,9 @@ void	as_3_function::execute(array<as_value>& lregister, as_environment* env, as_
 
         case AS_OPCODE_LessThen: //lessthan
             {
-                as_value result = as_value::abstract_relational_comparison( stack.top(1), stack.top(0) );
+                as_value result;
+                bool is_nan = as_value::abstract_relational_comparison( stack.top(1), stack.top(0), result);
+                UNUSED(is_nan);
 
                 IF_VERBOSE_ACTION(log_msg("EX: lessthan %s & %s : %s\n", stack.top(1).to_xstring(), stack.top(0).to_xstring(), result.to_string() ) );
 
@@ -808,10 +1082,10 @@ void	as_3_function::execute(array<as_value>& lregister, as_environment* env, as_
 
             } break;
 
-        case AS_OPCODE_GetLocal_0:	// getlocal_0
-        case AS_OPCODE_GetLocal_1:	// getlocal_1
-        case AS_OPCODE_GetLocal_2:	// getlocal_2
-        case AS_OPCODE_GetLocal_3:	// getlocal_3
+        case AS_OPCODE_GetLocal_0: // getlocal_0
+        case AS_OPCODE_GetLocal_1: // getlocal_1
+        case AS_OPCODE_GetLocal_2: // getlocal_2
+        case AS_OPCODE_GetLocal_3: // getlocal_3
             {
                 as_value& val = lregister[opcode & 0x03];
                 stack.push(val);
@@ -831,7 +1105,7 @@ void	as_3_function::execute(array<as_value>& lregister, as_environment* env, as_
             {
                 int fileNameIndex = 0;
                 ip += read_vu30(fileNameIndex, &m_code[ip]);
-                log_msg("TODO opcode AS_OPCODE_DebugFile\n");
+                IF_VERBOSE_ACTION(log_msg("TODO opcode AS_OPCODE_DebugFile\n"));
             }
             break;
 
@@ -839,33 +1113,36 @@ void	as_3_function::execute(array<as_value>& lregister, as_environment* env, as_
             {
                 int line = 0;
                 ip += read_vu30(line, &m_code[ip]);
-                log_msg("TODO opcode AS_OPCODE_DebugLine\n");
+                IF_VERBOSE_ACTION(log_msg("TODO opcode AS_OPCODE_DebugLine\n"));
             }
             break;
 
         case AS_OPCODE_ExeptionTrown:
             {
-                log_msg("TODO opcode AS_OPCODE_ExeptionTrown\n");
+                IF_VERBOSE_ACTION(log_msg("TODO opcode AS_OPCODE_ExeptionTrown\n"));
             }
             break;
 
         case AS_OPCODE_Debug:
             {
                 ip += 4;
-                log_msg("TODO opcode AS_OPCODE_Debug\n");
+                IF_VERBOSE_ACTION(log_msg("TODO opcode AS_OPCODE_Debug\n"));
             }
             break;
 
         case AS_OPCODE_Jump:
             {
-                int offset = m_code[ip++];
+                int offset = read_signed_offset_24(m_code, ip);
+                ip += offset + 3;
+
                 IF_VERBOSE_ACTION(log_msg("EX: jump on %d bytes\n", offset));
+            }
+            break;
 
-                float offset_in_units = static_cast<float>(offset);
-
-                offset = static_cast<int>(ceil(offset_in_units / 4.f));
-
-                ip += offset;
+        case AS_OPCODE_Label:
+            {
+                //noop
+                ip;
             }
             break;
 
@@ -981,5 +1258,13 @@ lfl_string as_3_function::get_multiname(int index, vm_stack & stack) const
         return "";
     }
 }
+
+int as_3_function::read_signed_offset_24( const membuf& codebuf, int cursor )
+{
+    int8 s = *reinterpret_cast<int8*>(&m_code[cursor + 2]);
+
+    return m_code[cursor] | m_code[cursor + 1] << 8 | s << 16;
+}
+
 }
 

@@ -115,7 +115,7 @@ namespace gameswf
 		// These set_*()'s are more type-safe; should be used
 		// in preference to generic overloaded set().  You are
 		// more likely to get a warning/error if misused.
-		exported_module void	set_tu_string(const lfl_string& str);
+		exported_module void	set_lfl_string(const lfl_string& str);
 		exported_module void	set_string(const char* str);
 		exported_module void	set_double(double val);
 		exported_module void	set_bool(bool val);
@@ -169,7 +169,8 @@ namespace gameswf
 		inline void set_flags(int flags) const  { m_flags = flags; }
 
 		static bool abstract_equality_comparison( const as_value & first, const as_value & second );
-		static as_value abstract_relational_comparison( const as_value & first, const as_value & second );
+		static bool abstract_relational_comparison( const as_value & first, const as_value & second, as_value& retval);
+        static bool strict_equality(const as_value& first, const as_value& second);
 
 	};
 

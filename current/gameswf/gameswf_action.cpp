@@ -755,7 +755,7 @@ namespace gameswf
 						new_string.resize(size);
 
 						env->drop(2);
-						env->top(0).set_tu_string(new_string);
+						env->top(0).set_lfl_string(new_string);
 					} break;
 
 					case ACTION_Pop:	// pop
@@ -814,7 +814,7 @@ namespace gameswf
 						lfl_string str = env->top(1).to_lfl_string();
 						str += env->top(0).to_lfl_string();
 						env->drop(1);
-						env->top(0).set_tu_string(str);
+						env->top(0).set_lfl_string(str);
 					} break;
 
 					case ACTION_GetProperty:	// get property
@@ -1266,7 +1266,7 @@ namespace gameswf
 						{
 							lfl_string str = env->top(1).to_string();
 							str += env->top(0).to_string();
-							env->top(1).set_tu_string(str);
+							env->top(1).set_lfl_string(str);
 						}
 						else
 							env->top(1) += env->top(0).to_number();
@@ -1300,7 +1300,7 @@ namespace gameswf
 					case ACTION_ToString:	// to string
 					{
 						const lfl_string& str = env->top(0).to_lfl_string();
-						env->top(0).set_tu_string(str);
+						env->top(0).set_lfl_string(str);
 					} break;
 
 					case ACTION_Duplicate:	// dup

@@ -93,7 +93,7 @@ namespace gameswf
 				}
 				while (val > 0);
 			}
-			fn.result->set_tu_string(res);
+			fn.result->set_lfl_string(res);
 		}
 		else
 		{

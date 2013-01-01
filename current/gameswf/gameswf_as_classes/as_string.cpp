@@ -37,7 +37,7 @@ namespace gameswf
 			result += fn.arg(i).to_string();
 		}
 
-		fn.result->set_tu_string(result);
+		fn.result->set_lfl_string(result);
 	}
   
 	void string_from_char_code(const function_call& fn)
@@ -52,7 +52,7 @@ namespace gameswf
 			result.append_wide_char(c);
 		}
 
-		fn.result->set_tu_string(result);
+		fn.result->set_lfl_string(result);
 	}
 
 	void string_index_of(const function_call& fn)
@@ -144,7 +144,7 @@ namespace gameswf
 		start = iclamp(start, 0, len);
 		end = iclamp(end, start, len);
 
-		fn.result->set_tu_string(this_str.utf8_substring(start, end));
+		fn.result->set_lfl_string(this_str.utf8_substring(start, end));
 	}
 
 	void string_split(const function_call& fn)
@@ -181,7 +181,7 @@ namespace gameswf
 				lfl_string word(p, (int) (n - p));
 				as_value val;
 				as_value index(i);
-				val.set_tu_string(word);
+				val.set_lfl_string(word);
 				arr->set_member(index.to_lfl_string(), val);
 				p = n;
 				i++;
@@ -195,7 +195,7 @@ namespace gameswf
 					lfl_string word(word_start, int(p - word_start));
 					as_value val;
 					as_value index(i);
-					val.set_tu_string(word);
+					val.set_lfl_string(word);
 					arr->set_member(index.to_lfl_string(), val);
 					i++;
 
@@ -246,7 +246,7 @@ namespace gameswf
 
 		if (len <= 0)
 		{
-			fn.result->set_tu_string("");
+			fn.result->set_lfl_string("");
 			return;
 		}
 
@@ -258,7 +258,7 @@ namespace gameswf
 
 		if (start < end)
 		{
-			fn.result->set_tu_string(this_str.utf8_substring(start, end));
+			fn.result->set_lfl_string(this_str.utf8_substring(start, end));
 		}
 	}
 
@@ -284,19 +284,19 @@ namespace gameswf
 		if (end < start) tu_swap(&start, &end);	// dumb, but that's what the docs say
 		assert(end >= start);
 
-		fn.result->set_tu_string(this_str.utf8_substring(start, end));
+		fn.result->set_lfl_string(this_str.utf8_substring(start, end));
 	}
 
 	void string_to_lowercase(const function_call& fn)
 	{
 		const lfl_string& this_str = fn.this_value.to_lfl_string();
-		fn.result->set_tu_string(this_str.utf8_to_lower());
+		fn.result->set_lfl_string(this_str.utf8_to_lower());
 	}
 	
 	void string_to_uppercase(const function_call& fn) 
 	{
 		const lfl_string& this_str = fn.this_value.to_lfl_string();
-		fn.result->set_tu_string(this_str.utf8_to_upper());
+		fn.result->set_lfl_string(this_str.utf8_to_upper());
 	}
 
 	void string_char_at(const function_call& fn)
@@ -309,14 +309,14 @@ namespace gameswf
 			char c[2];
 			c[0] = this_str.utf8_char_at(index);
 			c[1] = 0;
-			fn.result->set_tu_string(c);
+			fn.result->set_lfl_string(c);
 		}
 	}
 	
 	void string_to_string(const function_call& fn)
 	{
 		const lfl_string& str = fn.this_value.to_lfl_string();
-		fn.result->set_tu_string(str);
+		fn.result->set_lfl_string(str);
 	}
 
 	void string_length(const function_call& fn)

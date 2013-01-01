@@ -585,7 +585,7 @@ void	test_stringi()
 	assert(a == b);
 
 	lfl_string	c(b);
-	assert(a.to_tu_string() != c);
+	assert(a.to_lfl_string() != c);
 
 	// Ordering.
 	a = "a";
@@ -654,7 +654,7 @@ void	test_stringi_hash()
 		assert(value == 7654321);
 
 		// Make sure hash keys are preserving case.
-		assert(a.find(key)->first.to_tu_string() == original_key.to_tu_string());
+		assert(a.find(key)->first.to_lfl_string() == original_key.to_lfl_string());
 
 		// Make sure they're actually the same entry.
 		assert(a.find(original_key) == a.find(key));

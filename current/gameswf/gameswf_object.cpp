@@ -368,7 +368,7 @@ namespace gameswf
 		// Check for member function.
 		bool called = false;
 		{
-			const lfl_stringi&	method_name = id.get_function_name().to_tu_stringi();
+			const lfl_stringi&	method_name = id.get_function_name().to_lfl_stringi();
 			if (method_name.length() > 0)
 			{
 				as_value	method;
