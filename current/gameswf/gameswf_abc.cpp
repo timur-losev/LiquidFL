@@ -710,6 +710,80 @@ namespace gameswf
         return m_string[name];
     }
 
+    const lfl_string& abc_def::get_abc_file_name() const
+    {
+        return m_abc_name;
+    }
+
+    void abc_def::set_abc_file_name(const lfl_string& n)
+    {
+        m_abc_name = n;
+    }
+
+    void abc_def::merge_cpool(abc_def* oth )
+    {
+        //merge double pool
+        {
+            array<double>& oth_double = oth->m_double;
+            int double_at_index = m_double.size();
+            m_double.resize(double_at_index + oth_double.size());
+
+            for (int i = 0; i < oth_double.size(); ++i)
+            {
+                m_double[i + double_at_index] = oth_double[i];
+            }
+        }
+
+        //merge integer pool
+        {
+            array<int>& oth_int = oth->m_integer;
+            int integer_at_index = m_integer.size();
+            m_integer.resize(integer_at_index + oth_int.size());
+
+            for (int i = 0; i < oth_int.size(); ++i)
+            {
+                m_integer[i + integer_at_index] = oth_int[i];
+            }
+        }
+
+        //merge multiname pool
+        {
+            array<multiname>& oth_multiname = oth->m_multiname;
+            int multiname_at_index = m_multiname.size();
+            m_multiname.resize(multiname_at_index + oth_multiname.size());
+
+            for(int i = 0; i < oth_multiname.size(); ++i)
+            {
+                m_multiname[i + multiname_at_index] = oth_multiname[i];
+            }
+        }
+
+        //merge string pool
+        {
+            array<lfl_string>& o = oth->m_string;
+            int at_index = m_string.size();
+            m_string.resize(at_index + o.size());
+
+            for(int i = 0; i < o.size(); ++i)
+            {
+                IF_VERBOSE_PARSE(log_msg("cpool_info: string[%d]='%s'\n", i, m_string[i].c_str()));
+                m_string[i + at_index] = o[i];
+            }
+        }
+    }
+
+    void abc_def::merge_with( abc_def* oth )
+    {
+        merge_abc_name(oth);
+        merge_cpool(oth);
+    }
+
+    void abc_def::merge_abc_name( abc_def* oth )
+    {
+        m_abc_name += '|';
+        m_abc_name += oth->get_abc_file_name();
+    }
+
 };	// end namespace gameswf
 
 

@@ -42,7 +42,7 @@ namespace gameswf
 		int m_flags;
 		int m_ns;
 		int m_ns_set;
-		int m_name;
+		int m_name; //to string pool
 
 		multiname() :
 			m_kind(CONSTANT_UNDEFINED),
@@ -118,7 +118,7 @@ namespace gameswf
         };
 
         kind::Enum  m_kind;
-        int         m_name;
+        int         m_name; //to string pool
 
         as3_namespace() :
         m_kind(kind::CONSTANT_Undefined),
@@ -138,7 +138,7 @@ namespace gameswf
         typedef int key_t;
         typedef int value_t;
 
-        int     m_name;
+        int     m_name; //to string pool
         int     m_item_count;
 
         //std::map<key_t, value_t> m_items_map;
@@ -162,10 +162,10 @@ namespace gameswf
 			CONSTANT_ClassProtectedNs = 0x08
 		};
 
-		int m_name;
-		int m_super_name;
+		int m_name;     //to multiname pool
+		int m_super_name; //to multiname pool
 		Uint8 m_flags;
-		int m_protectedNs;
+		int m_protectedNs; //to namespace pool
 		array<int> m_interface;
 		int m_iinit;
 		gc_array<gc_ptr<traits_info> > m_trait;
@@ -217,6 +217,8 @@ namespace gameswf
 		gc_array<gc_ptr<instance_info> > m_instance;
 		gc_array<gc_ptr<class_info> > m_class;
 		gc_array<gc_ptr<script_info> > m_script;
+
+        lfl_string          m_abc_name;
 
 		inline const char* get_string(int index) const
 		{
@@ -276,7 +278,11 @@ namespace gameswf
 		virtual ~abc_def();
 
 		void	read(lfl_stream* in, movie_definition_sub* m);
+        void    merge_with(abc_def* oth);
+
 		void	read_cpool(lfl_stream* in);
+        void    merge_cpool(abc_def* oth);
+        void    merge_abc_name(abc_def* oth);
 
 		inline const char * get_super_class(lfl_string& name) const
 		{
@@ -294,6 +300,9 @@ namespace gameswf
 		class_info* get_class_info(int class_index) const;
 
         const lfl_string& get_method_name(int mtid) const;
+
+        const lfl_string& get_abc_file_name() const;
+        void  set_abc_file_name(const lfl_string& n);
 	};
 }
 

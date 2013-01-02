@@ -249,11 +249,18 @@ namespace gameswf
 		}
 	}
 
-	void	movie_def_impl::add_abc(lfl_string& name, abc_def* abc)
+	void	movie_def_impl::add_abc(abc_def* abc)
 	{
-		assert(m_abc == NULL);
-		m_abc = abc;
-		m_abc_name = name;
+		//assert(m_abc == NULL);
+        if (m_abc)
+        {
+            //Merge Abc file
+            m_abc->merge_with(abc);
+        }
+        else
+        {
+            m_abc = abc;
+        }
 	}
 
 	void	movie_def_impl::add_symbol_class(int character_id, const lfl_string& class_name)

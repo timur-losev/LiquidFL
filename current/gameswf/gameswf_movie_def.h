@@ -205,7 +205,7 @@ namespace gameswf
 		virtual void	add_symbol_class(int character_id, const lfl_string& class_name) = 0;
 		virtual void	add_scene(int character_id, const lfl_string& class_name) = 0;
 		virtual void	add_frame_label(int character_id, const lfl_string& class_name) = 0;
-		virtual void	add_abc(lfl_string& name, abc_def* abc) = 0;
+		virtual void	add_abc(abc_def* abc) = 0;
 		virtual void	add_character(int id, character_def* ch) = 0;
 		virtual void	add_font(int id, font* ch) = 0;
 		virtual font*	get_font(int id) = 0;
@@ -333,7 +333,6 @@ namespace gameswf
 		gc_ptr<root> m_instance;	// cached movie instance.
 
 		// for AVM2, Flash9
-		lfl_string m_abc_name;
 		gc_ptr<abc_def> m_abc;
 		hash<int, lfl_string>	m_symbol_class;
 		hash<int, lfl_string>	m_scene;
@@ -363,7 +362,7 @@ namespace gameswf
 		virtual void	add_import(const lfl_string& source_url, int id, const lfl_string& symbol);
 		bool	in_import_table(int character_id);
 		virtual void	visit_imported_movies(import_visitor* visitor);
-		virtual void	add_abc(lfl_string& name, abc_def* abc);
+		virtual void	add_abc(abc_def* abc);
 		const abc_def * get_abc() const{ return m_abc.get_ptr(); }
 		virtual void	add_symbol_class(int character_id, const lfl_string& class_name);
 		virtual void	add_scene(int character_id, const lfl_string& class_name);

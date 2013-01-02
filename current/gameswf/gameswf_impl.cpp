@@ -1033,7 +1033,8 @@ namespace gameswf
 
 		abc_def* abc = new abc_def(m->get_player());
 		abc->read(in, m);
-		m->add_abc(name, abc);
+        abc->set_abc_file_name(name);
+		m->add_abc(abc);
 	}
 
 	void	define_font_name(lfl_stream* in, int tag_type, movie_definition_sub* m)

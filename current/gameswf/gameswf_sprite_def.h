@@ -72,7 +72,7 @@ namespace gameswf
 			return 0;
 		}
 
-		virtual void	add_abc(lfl_string& name, abc_def* abc) { assert(0); };
+		virtual void	add_abc(abc_def* abc) { assert(0); };
 		virtual void	add_symbol_class(int character_id, const lfl_string& class_name) { assert(0); };
 		virtual void	add_scene(int character_id, const lfl_string& class_name) { assert(0); };
 		virtual void	add_frame_label(int character_id, const lfl_string& class_name) { assert(0); };
