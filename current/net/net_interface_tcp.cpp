@@ -156,7 +156,7 @@ int net_socket_tcp::read_line(lfl_string* str, int maxbytes, float timeout_secon
 	assert(str);
 
 	Uint32 start = tu_timer::get_ticks();
-	int timeout = int(timeout_seconds * 1000);	// ticks, ms
+	Uint32 timeout = Uint32(timeout_seconds * 1000);	// ticks, ms
 	int total_bytes_read = 0;
 
 	for (;;)       

@@ -169,8 +169,8 @@ namespace gameswf
 		}
 	}
 
-	as_object* vm_stack::find_property(const char* name)
-	{
+    as_object* vm_stack::find_property( const lfl_string& name )
+    {
 		for (int i = size() - 1; i >= 0; i--)
 		{
 			as_value val;
@@ -182,8 +182,8 @@ namespace gameswf
 		return NULL;
 	}
 
-	bool vm_stack::get_property(const char* name, as_value* val)
-	{
+    bool vm_stack::get_property( const lfl_string& name, as_value* val )
+    {
 		for (int i = size() - 1; i >= 0; i--)
 		{
 			if ((*this)[i].find_property(name, val))

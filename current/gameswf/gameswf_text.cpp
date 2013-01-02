@@ -402,7 +402,7 @@ namespace gameswf
 						g.m_shape_glyph = fnt->get_glyph_by_index(g.m_glyph_index);
 						if (g.m_shape_glyph)
 						{
-							g.m_fontsize = (int) rec.m_style.m_text_height / 20.0f;
+							g.m_fontsize = static_cast<int>(rec.m_style.m_text_height / 20.0f);
 
 							// find final glyph fontsize
 							matrix m = inst->get_world_matrix();

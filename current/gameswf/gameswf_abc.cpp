@@ -76,7 +76,7 @@ namespace gameswf
 		// The value can not be zero, and the multiname entry specified must be a QName.
 		m_name = in->read_vu30();
 		assert(m_name != 0 && abc->m_multiname[m_name].is_qname());
-		IF_VERBOSE_PARSE(log_msg("	traits: name='%s'\n",	abc->get_multiname(m_name)));
+		IF_VERBOSE_PARSE(log_msg("	traits: name='%s'\n",	abc->get_multiname(m_name).c_str()));
 		
 		Uint8 b = in->read_u8();
 		m_kind = b & 0x0F;
@@ -179,8 +179,8 @@ namespace gameswf
 		m_iinit = in->read_vu30();
 
 		IF_VERBOSE_PARSE(log_msg("  name='%s', supername='%s', ns='%s'\n",
-			abc->get_multiname(m_name), abc->get_multiname(m_super_name),
-				abc->get_namespace(m_protectedNs)));
+			abc->get_multiname(m_name).c_str(), abc->get_multiname(m_super_name).c_str(),
+				abc->get_namespace(m_protectedNs).c_str()));
 
 		n = in->read_vu30();
 		m_trait.resize(n);
@@ -490,7 +490,7 @@ namespace gameswf
                 }
                 IF_VERBOSE_PARSE(log_msg("cpool_info: namespace[%d]='%s', kind='%s'\n", 
                     i,
-                    get_string(ns.m_name),
+                    get_string(ns.m_name).c_str(),
                     as3_namespace::kind::to_string(ns.m_kind).c_str()));
             }
         }
@@ -541,7 +541,7 @@ namespace gameswf
 						mn.m_ns = in->read_vu30();
 						mn.m_name = in->read_vu30();
 						IF_VERBOSE_PARSE(log_msg("cpool_info: multiname[%d]='%s', ns='%s'\n", 
-							i, get_string(mn.m_name), get_namespace(mn.m_ns)));
+							i, get_string(mn.m_name).c_str(), get_namespace(mn.m_ns).c_str()));
 						break;
 					}
 
@@ -566,7 +566,7 @@ namespace gameswf
 						mn.m_name = in->read_vu30();
 						mn.m_ns_set = in->read_vu30();
 						IF_VERBOSE_PARSE(log_msg("cpool_info: multiname[%d]='%s', ns_set='%s'\n", 
-							i, get_string(mn.m_name), "todo"));
+							i, get_string(mn.m_name).c_str(), "todo"));
 						break;
 
 					case multiname::CONSTANT_MultinameL:
@@ -592,8 +592,8 @@ namespace gameswf
 
 	}
 
-	const char * abc_def::get_class_from_constructor( int method )
-	{
+    const lfl_string& abc_def::get_class_from_constructor( int method )
+    {
 		for( int instance_index = 0; instance_index < m_instance.size(); ++instance_index )
 		{
 			if( m_instance[ instance_index ]->m_iinit == method )
@@ -602,7 +602,8 @@ namespace gameswf
 			}
 		}
 
-		return NULL;
+        static lfl_string undefined;
+		return undefined;
 	}
 
 

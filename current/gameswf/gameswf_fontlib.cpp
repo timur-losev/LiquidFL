@@ -413,7 +413,7 @@ namespace gameswf
 		ge->m_bi = render::create_bitmap_info_alpha(GLYPH_CACHE_TEXTURE_SIZE, GLYPH_CACHE_TEXTURE_SIZE, s_image_buffer);
 
 		// Fill in rendered_glyph_info.
-		scale = version > 7 ? 1024 * 20 : 1024;
+		scale = static_cast<float>(version > 7 ? 1024 * 20 : 1024);
 		scale /= fontsize / (float) GLYPH_CACHE_TEXTURE_SIZE;
 		ge->m_bounds.m_x_min = offset_x / scale;
 		ge->m_bounds.m_x_max = 1;

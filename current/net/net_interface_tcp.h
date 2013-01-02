@@ -10,9 +10,9 @@
 
 #include "Winsock.h"
 
-#ifndef strdup
-#	define strdup _strdup
-#endif
+//#ifndef strdup
+//#	define strdup _strdup
+//#endif
 
 #else
 

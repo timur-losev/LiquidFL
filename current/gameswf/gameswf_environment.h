@@ -72,6 +72,11 @@ namespace gameswf
 			(*this)[m_stack_size] = val;
 		}
 
+        void reset(const lfl_string& val)
+        {
+            (*this)[m_stack_size].set_string(val);
+        }
+
 		void reset(const char* val)
 		{
 			(*this)[m_stack_size].set_string(val);
@@ -133,10 +138,10 @@ namespace gameswf
 		void clear_refs(hash<as_object*, bool>* visited_objects, as_object* this_ptr);
 
 		// return object that contains the property
-		as_object* find_property(const char* name);
+        as_object* find_property(const lfl_string& name);
 
 		// get value of property
-		bool get_property(const char* name, as_value* val);
+        bool get_property(const lfl_string& name, as_value* val);
 
 	private:
 

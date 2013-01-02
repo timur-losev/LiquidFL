@@ -83,6 +83,7 @@ namespace gameswf
 		exported_module as_value();
 		exported_module as_value(const as_value& v);
 		exported_module as_value(const char* str);
+        exported_module as_value(const lfl_string& str);
 		exported_module as_value(const wchar_t* wstr);
 		exported_module as_value(bool val);
 		exported_module as_value(int val);
@@ -117,6 +118,7 @@ namespace gameswf
 		// more likely to get a warning/error if misused.
 		exported_module void	set_lfl_string(const lfl_string& str);
 		exported_module void	set_string(const char* str);
+        exported_module void	set_string(const lfl_string& str);
 		exported_module void	set_double(double val);
 		exported_module void	set_bool(bool val);
 		exported_module void	set_int(int val) { set_double(val); }

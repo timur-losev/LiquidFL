@@ -1540,6 +1540,11 @@ public:
         return strcmp(*this, str) == 0;
     }
 
+    exported_module bool is_empty() const
+    {
+        return size() == 0;
+    }
+
     exported_module bool	operator!=(const char* str) const
     {
         return strcmp(*this, str) != 0;

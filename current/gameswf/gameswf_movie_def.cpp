@@ -697,7 +697,7 @@ namespace gameswf
 			for (int i = 0; i < ii->m_trait.size(); i++)
 			{
 				traits_info* ti = ii->m_trait[i].get();
-				const char* name = m_abc->get_multiname(ti->m_name);
+				const lfl_string& name = m_abc->get_multiname(ti->m_name);
 				as_value val;
 				switch (ti->m_kind)
 				{

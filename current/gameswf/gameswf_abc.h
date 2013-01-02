@@ -220,9 +220,9 @@ namespace gameswf
 
         lfl_string          m_abc_name;
 
-		inline const char* get_string(int index) const
+        inline const lfl_string& get_string(int index) const
 		{
-			return m_string[index].c_str(); 
+			return m_string[index]; 
 		}
 
 		inline int get_integer(int index) const
@@ -235,12 +235,12 @@ namespace gameswf
 			return m_double[index]; 
 		}
 
-		inline const char* get_namespace(int index) const
+        inline const lfl_string& get_namespace(int index) const
 		{
 			return get_string(m_namespace[index].m_name); 
 		}
 
-		inline const char* get_multiname(int index) const
+        inline const lfl_string& get_multiname(int index) const
 		{
 			return get_string(m_multiname[index].m_name); 
 		}
@@ -250,20 +250,21 @@ namespace gameswf
 			return (multiname::kind)m_multiname[index].m_kind; 
 		}
 
-		inline const char* get_multiname_namespace(int index) const
+        inline const lfl_string& get_multiname_namespace(int index) const
 		{
 			const multiname & mn = m_multiname[index];
+            static lfl_string undefined;
 
 			switch( mn.m_kind )
 			{
 				case multiname::CONSTANT_QName:
-					return "";
+					return undefined;
 				case multiname::CONSTANT_Multiname:
 				case multiname::CONSTANT_MultinameA:
 					return get_namespace( mn.m_ns );
 				default:
 					log_msg( "implement get_multiname_namespace for this kind %i\n", mn.m_kind );
-					return NULL;
+					return undefined;
 			} 
 		}
 
@@ -289,7 +290,7 @@ namespace gameswf
 			return get_multiname( get_instance_info( name )->m_super_name );
 		}
 
-		const char * get_class_from_constructor(int method);
+        const lfl_string& get_class_from_constructor(int method);
 
 		// get class constructor
 		as_function* get_class_constructor(const lfl_string& name) const;

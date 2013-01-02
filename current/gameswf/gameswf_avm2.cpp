@@ -535,7 +535,7 @@ void	as_3_function::execute(array<as_value>& lregister, as_environment* env, as_
             {
                 int index;
                 ip += read_vu30(index, &m_code[ip]);
-                const char* val = m_abc->get_string(index);
+                const lfl_string& val = m_abc->get_string(index);
                 stack.push(val);
 
                 IF_VERBOSE_ACTION(log_msg("EX: pushstring\t '%s'\n", val));
@@ -569,7 +569,7 @@ void	as_3_function::execute(array<as_value>& lregister, as_environment* env, as_
             {
                 int index;
                 ip += read_vu30(index, &m_code[ip]);
-                const char* name = m_abc->get_multiname(index);
+                const lfl_string& name = m_abc->get_multiname(index);
 
                 int arg_count;
                 ip += read_vu30(arg_count, &m_code[ip]);
@@ -613,7 +613,8 @@ void	as_3_function::execute(array<as_value>& lregister, as_environment* env, as_
                     }
                 }
 
-                IF_VERBOSE_ACTION(log_msg("EX: callproperty\t 0x%p.%s(args:%d), result %s\n", stack.top(0).to_xstring(), name, arg_count, result.to_xstring()));
+                IF_VERBOSE_ACTION(log_msg("EX: callproperty\t 0x%p.%s(args:%d), result %s\n", stack.top(0).to_xstring(), name.c_str(),
+                    arg_count, result.to_xstring()));
 
                 stack.drop(1);
                 stack.push( result );
@@ -688,8 +689,8 @@ void	as_3_function::execute(array<as_value>& lregister, as_environment* env, as_
                 // Stack ..., obj, [ns], [name], arg1,...,argn => ..., value
                 int index;
                 ip += read_vu30(index, &m_code[ip]);
-                const char* name = m_abc->get_multiname(index);
-                const char * name_space = m_abc->get_multiname_namespace(index);
+                const lfl_string& name = m_abc->get_multiname(index);
+                const lfl_string& name_space = m_abc->get_multiname_namespace(index);
                 UNUSED(name_space);
 
                 int arg_count;
@@ -715,7 +716,7 @@ void	as_3_function::execute(array<as_value>& lregister, as_environment* env, as_
                     call_method( m_abc->get_class_constructor( name ), &env, new_object.get_ptr(), arg_count, 0 );
                 }
 
-                IF_VERBOSE_ACTION(log_msg("EX: constructprop\t 0x%p.%s(args:%d)\n", obj, name, arg_count));
+                IF_VERBOSE_ACTION(log_msg("EX: constructprop\t 0x%p.%s(args:%d)\n", obj, name.c_str(), arg_count));
 
                 stack.push( new_object.get_ptr() );
             } break;
@@ -725,7 +726,7 @@ void	as_3_function::execute(array<as_value>& lregister, as_environment* env, as_
                 // Stack: ..., obj, [ns], [name], arg1,...,argn => ...
                 int index;
                 ip += read_vu30(index, &m_code[ip]);
-                const char* name = m_abc->get_multiname(index);
+                const lfl_string& name = m_abc->get_multiname(index);
 
                 int arg_count;
                 ip += read_vu30(arg_count, &m_code[ip]);
@@ -754,7 +755,7 @@ void	as_3_function::execute(array<as_value>& lregister, as_environment* env, as_
                     }
                 }
 
-                IF_VERBOSE_ACTION(log_msg("EX: callpropvoid\t 0x%p.%s(args:%d)\n", obj, name, arg_count));
+                IF_VERBOSE_ACTION(log_msg("EX: callpropvoid\t 0x%p.%s(args:%d)\n", obj, name.c_str(), arg_count));
             } break;
 
         case AS_OPCODE_NewArray: //newarray
@@ -804,7 +805,7 @@ void	as_3_function::execute(array<as_value>& lregister, as_environment* env, as_
             {
                 int index;
                 ip += read_vu30(index, &m_code[ip]);
-                const char* name = m_abc->get_multiname(index);
+                const lfl_string& name = m_abc->get_multiname(index);
 
                 // search property in scope
                 as_object* obj = scope.find_property(name);
@@ -822,7 +823,7 @@ void	as_3_function::execute(array<as_value>& lregister, as_environment* env, as_
 
                     obj = get_global();
                 }
-                IF_VERBOSE_ACTION(log_msg("EX: findpropstrict\t %s, obj=0x%p\n", name, obj));
+                IF_VERBOSE_ACTION(log_msg("EX: findpropstrict\t %s, obj=0x%p\n", name.c_str(), obj));
 
                 stack.push(obj);
             } break;
@@ -831,20 +832,20 @@ void	as_3_function::execute(array<as_value>& lregister, as_environment* env, as_
             {
                 int index;
                 ip += read_vu30(index, &m_code[ip]);
-                const char* name = m_abc->get_multiname(index);
-                const char * name_space = m_abc->get_multiname_namespace(index);
+                const lfl_string& name = m_abc->get_multiname(index);
+                const lfl_string& name_space = m_abc->get_multiname_namespace(index);
                 UNUSED(name_space);
 
                 as_object* obj = scope.find_property(name);
 
                 if( obj )
                 {
-                    IF_VERBOSE_ACTION(log_msg("EX: findproperty\t '%s', obj=0x%p\n", name, obj));
+                    IF_VERBOSE_ACTION(log_msg("EX: findproperty\t '%s', obj=0x%p\n", name.c_str(), obj));
                     stack.push(obj);
                 }
                 else
                 {
-                    IF_VERBOSE_ACTION(log_msg("EX: findproperty\t '%s', obj=global\n", name));
+                    IF_VERBOSE_ACTION(log_msg("EX: findproperty\t '%s', obj=global\n", name.c_str()));
                     stack.push(get_global());
                 }
             } break;
@@ -853,7 +854,7 @@ void	as_3_function::execute(array<as_value>& lregister, as_environment* env, as_
             {
                 int index;
                 ip += read_vu30(index, &m_code[ip]);
-                const char* name = m_abc->get_multiname(index);
+                const lfl_string& name = m_abc->get_multiname(index);
 
                 // search and get property in scope
                 as_value val;
@@ -875,7 +876,7 @@ void	as_3_function::execute(array<as_value>& lregister, as_environment* env, as_
                     }
                 }
 
-                IF_VERBOSE_ACTION(log_msg("EX: getlex\t %s, value=%s\n", name, val.to_xstring()));
+                IF_VERBOSE_ACTION(log_msg("EX: getlex\t %s, value=%s\n", name.c_str(), val.to_xstring()));
 
                 stack.push(val);
             } break;
@@ -884,9 +885,9 @@ void	as_3_function::execute(array<as_value>& lregister, as_environment* env, as_
             {
                 int index;
                 ip += read_vu30(index, &m_code[ip]);
-                const char* name = m_abc->get_multiname(index);
+                const lfl_string& name = m_abc->get_multiname(index);
 
-                IF_VERBOSE_ACTION(log_msg("EX: setproperty\t %s.%s, value=%s\n", stack.top(1).to_xstring(), name, stack.top(0).to_xstring()));
+                IF_VERBOSE_ACTION(log_msg("EX: setproperty\t %s.%s, value=%s\n", stack.top(1).to_xstring(), name.c_str(), stack.top(0).to_xstring()));
 
                 as_object * object = stack.top(1).to_object();
 
@@ -957,7 +958,7 @@ void	as_3_function::execute(array<as_value>& lregister, as_environment* env, as_
             {
                 int index;
                 ip += read_vu30(index, &m_code[ip]);
-                const char* name = m_abc->get_multiname(index);
+                const lfl_string& name = m_abc->get_multiname(index);
 
                 as_value& val = stack.top(0);
                 as_object* obj = stack.top(1).to_object();
@@ -966,7 +967,7 @@ void	as_3_function::execute(array<as_value>& lregister, as_environment* env, as_
                     obj->set_member(name, val);
                 }
 
-                IF_VERBOSE_ACTION(log_msg("EX: initproperty\t 0x%p.%s=%s\n", obj, name, val.to_xstring()));
+                IF_VERBOSE_ACTION(log_msg("EX: initproperty\t 0x%p.%s=%s\n", obj, name.c_str(), val.to_xstring()));
 
                 stack.drop(2);
             } break;
@@ -989,8 +990,8 @@ void	as_3_function::execute(array<as_value>& lregister, as_environment* env, as_
             {
                 int index;
                 ip += read_vu30( index, &m_code[ip]);
-                const char * type_name = m_abc->get_multiname( index );
-                IF_VERBOSE_ACTION(log_msg("EX: coerce : %s todo\n", type_name)); 
+                const lfl_string& type_name = m_abc->get_multiname( index );
+                IF_VERBOSE_ACTION(log_msg("EX: coerce : %s todo\n", type_name.c_str())); 
             } break;
 
         case AS_OPCODE_Coerce_s: // coerce_s
@@ -1197,7 +1198,9 @@ void as_3_function::read(lfl_stream* in)
     }
 
     IF_VERBOSE_PARSE(log_msg("method_info: name='%s', type='%s', params=%d\n",
-        m_abc->get_string(m_name), m_abc->get_multiname(m_return_type), m_param_type.size()));
+        m_abc->get_string(m_name).c_str(), 
+        m_abc->get_multiname(m_return_type).c_str(),
+        m_param_type.size()));
 }
 
 void as_3_function::read_body(lfl_stream* in)
